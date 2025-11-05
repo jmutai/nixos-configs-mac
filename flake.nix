@@ -22,9 +22,9 @@
     # Add your hostnames here - darwin-rebuild will automatically use the correct one
     # You can check your hostname with: hostname
     hostnames = [
-      "Josphats-MacBook-Pro"  # Current hostname
+      "macbook-pro"  # Current hostname
       # Add more hostnames here as needed, e.g.:
-      # "My-MacBook-Pro"
+      # "My-MacBook-Air"
       # "Work-MacBook"
     ];
 
