@@ -94,18 +94,16 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 ### Step 4: Clone Configuration Repository
 
 ```bash
-git clone <your-repo-url> nixos-configs-mac
+git clone https://github.com/jmutai/nixos-configs-mac.git
 cd nixos-configs-mac
 ```
-
-**Note**: Replace `<your-repo-url>` with your actual repository URL.
 
 ### Step 5: Update Hostname (Optional)
 
 The configuration now supports dynamic hostname detection! Check your Mac's hostname:
 
 ```bash
-hostname
+scutil --get LocalHostName
 ```
 
 **Automatic Detection (Recommended):**
@@ -118,10 +116,35 @@ Edit `flake.nix` and add your hostname(s) to the `hostnames` list at the top of 
 
 ```nix
 hostnames = [
-  "Josphats-MacBook-Pro"  # Current hostname
+  "macbook-pro"  # Current hostname
   "Your-New-Hostname"     # Add additional hostnames here
 ];
 ```
+
+HostName, LocalHostName and ComputerName can be changed from CLI:
+
+```bash
+sudo scutil --set HostName macbook-pro-m3
+sudo scutil --set LocalHostName macbook-pro-m3
+sudo scutil --set ComputerName "Mutai's MacBook Pro"
+```
+
+Confirm settings:
+
+```bash
+scutil --get HostName
+scutil --get LocalHostName
+scutil --get ComputerName
+```
+
+You may see different values, they each serve a slightly different purpose.
+
+| Type           | Description                                         | Example                |
+|----------------|-----------------------------------------------------|------------------------|
+| **HostName**   | Used by network services (e.g., SSH, Terminal prompt). | `macbook-pro.local`    |
+| **LocalHostName** | Used for Bonjour/AirDrop.                         | `macbook-pro`          |
+| **ComputerName**  | Visible name in System Settings → General → Sharing. | `Josphat’s MacBook Pro` |
+
 
 All configuration variables (hostnames, username) are now defined at the top of the `let` block for easy customization.
 
@@ -134,12 +157,29 @@ username = "jkmutai";  # Change to your macOS username
 
 The configuration will automatically use this username throughout the setup.
 
+**Update Git Configuration:**
+Edit `home.nix` and update the git user settings:
+
+```nix
+programs.git = {
+  settings = {
+    user = {
+      name = "";  # Change to your git username
+      email = "";  # Change to your git email
+    };
+    # ... rest of config
+  };
+};
+```
+
+This will configure your git identity globally for all repositories.
+
 ### Step 6: Initial Build
 
 Run the initial build to apply your configuration:
 
 ```bash
-nix run nix-darwin -- switch --flake .
+sudo nix run nix-darwin -- switch --flake .
 ```
 
 This will:
@@ -345,6 +385,14 @@ Edit `home.nix` for shell plugins and settings:
 **Shell aliases** are now in `modules/aliases.nix`:
 - Edit `modules/aliases.nix` to add, modify, or remove aliases
 - This keeps all aliases organized in one place
+
+### Changing Git Configuration
+
+Edit `home.nix` under `programs.git.settings.user`:
+- **Name**: Change `user.name` to your git username
+- **Email**: Change `user.email` to your git email
+- **Aliases**: Add custom git aliases under `alias.*`
+- **Editor**: Change `core.editor` if you prefer a different editor
 
 ### Changing Neovim Configuration
 
