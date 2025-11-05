@@ -1,0 +1,10 @@
+# Build results
+result
+result-*
+
+# macOS
+.DS_Store
+
+# Backup files
+*.backup
+*~
