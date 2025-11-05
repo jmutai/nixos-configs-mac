@@ -144,7 +144,7 @@
 #      };
 #    };
 #  };
-  # Git configuration - UPDATED with new option names
+  # Git configuration
   programs.git = {
     enable = true;
     

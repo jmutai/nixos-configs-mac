@@ -20,6 +20,7 @@
       "beekeeper-studio"
       "microsoft-remote-desktop"
       "pritunl"
+      "ghostty"
     ];
     
     # Cleanup old versions
