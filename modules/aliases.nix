@@ -102,10 +102,12 @@
   pprune = "podman system prune -af";
   
   # Custom + System
+  cpu      = "sysctl -a | grep machdep.cpu";
+  gpu      = "system_profiler SPDisplaysDataType";
   projects = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects projects'';
-  update = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && sudo darwin-rebuild switch --flake .'';
-  upgrade = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && nix flake update && sudo darwin-rebuild switch --flake .'';
-  cleanup = "nix-collect-garbage -d";
+  update   = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && sudo darwin-rebuild switch --flake .'';
+  upgrade  = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && nix flake update && sudo darwin-rebuild switch --flake .'';
+  cleanup  = "nix-collect-garbage -d";
   
   # Navigation
   ".." = "cd ..";
