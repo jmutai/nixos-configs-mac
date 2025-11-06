@@ -102,6 +102,7 @@
   pprune = "podman system prune -af";
   
   # Custom + System
+  free     = "top -l 1 -s 0 | grep PhysMem";
   cpu      = "sysctl -a | grep machdep.cpu";
   gpu      = "system_profiler SPDisplaysDataType";
   projects = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects projects'';
