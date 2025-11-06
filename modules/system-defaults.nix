@@ -112,4 +112,13 @@
     # Set macOS version
     stateVersion = 6;
   };
+
+  # Ensure 24-hour clock is applied (sometimes CustomUserPreferences doesn't apply reliably)
+  system.activationScripts.set24HourClock = ''
+    # Set 24-hour clock in menu bar
+    defaults write com.apple.menuextra.clock Show24Hour -bool true
+    defaults write com.apple.menuextra.clock ShowAMPM -bool false
+    # Restart menu bar to apply changes
+    killall SystemUIServer 2>/dev/null || true
+  '';
 }
