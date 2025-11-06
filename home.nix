@@ -28,7 +28,7 @@
 
     # Cloud CLI tools
     google-cloud-sdk
-    google-cloud-sdk-gke-gcloud-auth-plugin
+    gke-gcloud-auth-plugin
 
     # Database clients
     postgresql
