@@ -1,6 +1,6 @@
 # Nix-Darwin macOS Configuration
 
-A declarative macOS system configuration managed with nix-darwin, Home Manager, and Nix Flakes. This repository contains a complete setup for macOS including system packages, GUI applications, development tools, shell configuration, and system preferences.
+A declarative macOS system configuration managed with [nix-darwin](https://github.com/nix-darwin/nix-darwin), [Home Manager](https://github.com/nix-community/home-manager), and [Nix Flakes](https://wiki.nixos.org/wiki/Flakes). This repository contains a complete setup for macOS including system packages, GUI applications, development tools, shell configuration, and system preferences.
 
 ## Table of Contents
 
@@ -49,13 +49,16 @@ Choose one of the following installation methods:
 
 #### Option A: Using Lix (Recommended)
 
-Lix is a modern, community fork of Nix with improvements and fixes.
+[Lix](https://github.com/lix-project/lix) is a modern, community fork of Nix with improvements and fixes.
 
 ```bash
 curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 ```
 
 #### Option B: Using Determinate Systems Installer
+
+[Determinate Nix Installer](https://github.com/DeterminateSystems/nix-installer) is the easiest and most reliable way to install Nix—as well as our longest-running project.
+
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
@@ -549,17 +552,17 @@ git push
 If something goes wrong, you can rollback to a previous generation:
 
 ```bash
-darwin-rebuild switch --rollback
+sudo darwin-rebuild switch --rollback
 ```
 
 Or list all generations:
 ```bash
-darwin-rebuild list-generations
+sudo darwin-rebuild --list-generations
 ```
 
 Then switch to a specific generation:
 ```bash
-darwin-rebuild switch --rollback <generation-number>
+sudo darwin-rebuild switch --rollback <generation-number>
 ```
 
 ## Additional Resources
