@@ -236,7 +236,7 @@ This configuration uses:
 ### System Packages (via Nix)
 
 - **Communication**: Slack, Zoom, Discord
-- **Terminals**: Kitty, Alacritty, Tabby
+- **Terminals**: Kitty, Alacritty, Tabby, Ghostty
 - **Browsers**: Firefox
 - **Development**: VS Code, GitHub CLI, Docker Compose, Lazydocker
 - **Productivity**: Obsidian, Joplin Desktop
@@ -248,7 +248,7 @@ This configuration uses:
 ### GUI Applications (via Homebrew Cask)
 
 - Cursor (editor)
-- Vivaldi, Google Chrome
+- Brave, Vivaldi, Google Chrome
 - iTerm2
 - Notion
 - Transmission, qBittorrent
