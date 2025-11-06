@@ -14,7 +14,6 @@
 
     # Microservices
     kubectl
-    kubelogin
 
     # Infrastructure as Code
     ansible

@@ -51,6 +51,7 @@
     bat      # Better cat
     eza      # Better ls
     tmux
+    iproute2mac
 
     # File management
     ranger
