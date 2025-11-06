@@ -3,9 +3,19 @@
   homebrew = {
     enable = true;
     
-    # Apps installed from Homebrew Cask
+    # Apps installed from Homebrew
+    brews = [
+        "xz"
+        "zlib"
+        "gnupg"
+        "git-lfs"
+        "cmake"
+        "nmap"
+        "node"
+    ];
     casks = [
       "cursor"
+      "visual-studio-code"
       "vivaldi"
       "google-chrome"
       "iterm2"
@@ -21,6 +31,8 @@
       "microsoft-remote-desktop"
       "pritunl"
       "ghostty"
+      "zed"
+      "motrix"
     ];
     
     # Cleanup old versions
