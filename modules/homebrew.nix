@@ -18,6 +18,7 @@
       "visual-studio-code"
       "vivaldi"
       "google-chrome"
+      "brave-browser"
       "iterm2"
       "notion"
       "transmission"
