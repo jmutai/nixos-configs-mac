@@ -14,6 +14,7 @@
 
     # Microservices
     kubectl
+    kubectl-oidc-login
 
     # Infrastructure as Code
     ansible
@@ -26,7 +27,7 @@
     k9s
     lens
 
-    # Cloud CLI tools
+    # Cloud CLI tools; gcloud components list
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
 
     # Database clients
