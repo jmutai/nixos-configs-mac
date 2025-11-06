@@ -49,9 +49,6 @@
       # IMPORTANT: Set primary user for system defaults
       system.primaryUser = username;
 
-      # Enable touch ID for sudo
-      security.pam.services.sudo_local.touchIdAuth = true;
-
       # Fonts
       fonts.packages = with pkgs; [
         nerd-fonts.fira-code
