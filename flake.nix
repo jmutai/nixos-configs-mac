@@ -44,7 +44,6 @@
         (self + "/modules/homebrew.nix")
         (self + "/modules/system-defaults.nix")
         (self + "/modules/nix.nix")
-        (self + "/modules/keyboard-remap.nix")
       ];
 
       # IMPORTANT: Set primary user for system defaults
