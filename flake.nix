@@ -43,7 +43,7 @@
         (self + "/modules/packages.nix")
         (self + "/modules/homebrew.nix")
         (self + "/modules/system-defaults.nix")
-        (self + "/modules/nix.nix")
+        (self + "/modules/nix-core.nix")
       ];
 
       # IMPORTANT: Set primary user for system defaults
