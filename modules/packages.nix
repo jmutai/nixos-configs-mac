@@ -8,7 +8,8 @@
     zoom-us
     discord
 
-    # Terminals
+    # Shell, Terminals
+    nushell
     kitty
     alacritty
     tabby
