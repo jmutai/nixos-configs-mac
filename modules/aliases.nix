@@ -62,17 +62,18 @@
   h     = "htop";
 
   # Terraform/OpenTofu shortcuts
-  tg    = "terragrunt";
   tf    = "tofu";
+  tfi   = "tofu init";
+  tg    = "terragrunt";
   tfa   = "tofu apply";
   tfp   = "tofu plan";
-  tfi   = "tofu init";
   tgp   = "terragrunt plan";
   tga   = "terragrunt apply";
   tgaa  = "terragrunt apply -auto-approve";
-  tra   = "terragrunt run --all apply";
-  traa  = "terragrunt run --all --non-interactive apply";
-  trp   = "terragrunt run --all plan";
+  tgri   = "terragrunt run --all init";
+  tgrp   = "terragrunt run --all plan";
+  tgra   = "terragrunt run --all apply";
+  tgraa  = "terragrunt run --all --non-interactive apply";
 
   # Docker/Podman aliases
   d      = "docker";
