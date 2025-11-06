@@ -14,7 +14,7 @@
 
     # Microservices
     kubectl
-    kubectl-oidc-login
+    kubelogin
 
     # Infrastructure as Code
     ansible
