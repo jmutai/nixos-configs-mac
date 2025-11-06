@@ -45,6 +45,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    history.size = 10000;
 
     # Powerlevel10k theme
     plugins = [
