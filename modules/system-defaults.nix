@@ -115,46 +115,5 @@
     # Set macOS version
     stateVersion = 6;
 
-    # Set screen lock shortcut to Cmd+L
-    activationScripts.setScreenLockShortcut = ''
-      # Enable Cmd+L for screen lock using Python to properly handle plist
-      python3 << 'PYEOF'
-      import plistlib
-      import subprocess
-      import os
-      import tempfile
-
-      # Path to the plist file
-      plist_path = os.path.expanduser("~/Library/Preferences/com.apple.symbolichotkeys.plist")
-      
-      # Read existing plist or create new dict
-      try:
-          with open(plist_path, 'rb') as f:
-              plist = plistlib.load(f)
-      except (FileNotFoundError, plistlib.InvalidFileException):
-          plist = {}
-      
-      # Ensure AppleSymbolicHotKeys exists
-      if 'AppleSymbolicHotKeys' not in plist:
-          plist['AppleSymbolicHotKeys'] = {}
-      
-      # Set screen lock shortcut (ID 10 = Lock Screen)
-      # Key code 37 = L, Modifier 1048576 = Command
-      plist['AppleSymbolicHotKeys']['10'] = {
-          'enabled': True,
-          'value': {
-              'type': 'standard',
-              'parameters': [37, 0, 1048576]
-          }
-      }
-      
-      # Write back to plist
-      with open(plist_path, 'wb') as f:
-          plistlib.dump(plist, f)
-      
-      # Reload SystemUIServer to apply changes
-      os.system('killall SystemUIServer 2>/dev/null || true')
-      PYEOF
-    '';
   };
 }
