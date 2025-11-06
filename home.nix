@@ -12,8 +12,10 @@
     nnn
     zsh-completions
 
-    # Microservices
+    # Containerization
     kubectl
+    kubernetes-helm
+    kustomize
 
     # Infrastructure as Code
     ansible
