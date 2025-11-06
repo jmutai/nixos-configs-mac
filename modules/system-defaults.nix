@@ -34,10 +34,10 @@
 
       # Login window settings
       loginwindow = {
-        autoLoginUser = false
+        autoLoginUser = false;
         GuestEnabled = false;
         DisableConsoleAccess = true;
-        LoginwindowText = "Welcome to macOS";
+        # LoginwindowText = "Welcome to macOS";
       };
 
       # Global macOS settings
