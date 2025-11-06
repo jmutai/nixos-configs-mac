@@ -17,7 +17,6 @@
     firefox
     
     # Development Tools
-    vscode
     gh
     docker-compose
     lazydocker
@@ -59,14 +58,26 @@
     # Screenshot tools
     flameshot
     
-    # Development tools
+    # languages and runtimes
+    python3
+    go
+    pipx
+    uv
+    yarn
     jq
     yq
     gnused
     coreutils
+    meson
+    act
+    lua
 
     # Media
+    aria2
+    yt-dlp
+    ffmpeg
     spotify
+    git-crypt
   ];
 }
 
