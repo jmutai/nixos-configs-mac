@@ -67,6 +67,7 @@
   tg    = "terragrunt";
   tfa   = "tofu apply";
   tfp   = "tofu plan";
+  tgi   = "terragrunt init";
   tgp   = "terragrunt plan";
   tga   = "terragrunt apply";
   tgaa  = "terragrunt apply -auto-approve";
