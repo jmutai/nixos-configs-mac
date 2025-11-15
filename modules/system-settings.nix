@@ -79,6 +79,12 @@
         TrackpadThreeFingerDrag = true;
       };
 
+      # Screen saver settings
+      screensaver = {
+        askForPassword = true;
+        askForPasswordDelay = 0;
+      };
+
       # Screenshot settings
       screencapture = {
         location = "~/Pictures/Screenshots";
@@ -102,6 +108,12 @@
         "com.apple.menuextra.clock" = {
           Show24Hour = true;
           ShowAMPM = false;
+        };
+
+        # Require password immediately after sleep or screen saver begins
+        "com.apple.screensaver" = {
+          askForPassword = 1;
+          askForPasswordDelay = 0;
         };
       };
     };

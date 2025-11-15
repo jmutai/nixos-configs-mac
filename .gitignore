@@ -8,3 +8,5 @@ result-*
 # Backup files
 *.backup
 *~
+./nix-config/*
+nix-config/
