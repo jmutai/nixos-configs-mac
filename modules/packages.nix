@@ -43,6 +43,7 @@ in {
     gh
     docker-compose
     lazydocker
+    devbox
 
     # Productivity
     lazygit
@@ -154,6 +155,7 @@ in {
       "nmap"
       "node"
       "pngquant"
+      "act"
     ];
 
     taps = [
