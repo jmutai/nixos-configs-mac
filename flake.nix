@@ -19,11 +19,9 @@
     agenix.url = "github:ryantm/agenix";
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
-    pwaerospace.url = "path:./modules/home/programs/aerospace";
-    sketchybar-config.url = "path:./modules/home/programs/sketchybar";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, agenix, nixvim, pwaerospace, sketchybar-config }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, agenix, nixvim }:
   let
     # ============================================================================
     # Configuration Variables - Edit these to customize your setup
@@ -87,16 +85,12 @@
           networking.hostName = hostname;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {
-            inherit pwaerospace sketchybar-config;
-          };
+          home-manager.extraSpecialArgs = { };
           home-manager.users.${username} = import (self + "/home.nix");
           home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
         }
       ];
-      specialArgs = {
-        inherit pwaerospace sketchybar-config;
-      };
+      specialArgs = { };
     };
   in
   {

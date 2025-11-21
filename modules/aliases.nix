@@ -39,7 +39,6 @@
   kdf   = "kubectl delete -f";
   kgs   = "kubectl get services";
   kgsec = "kubectl get secrets";
-  kgsectf = "kubectl get secrets \$1 -o jsonpath='{.data.tfstate}' | base64 -d | gunzip";
   kgn   = "kubectl get nodes";
   kexec = "kubectl exec -it";
   kge   = "kubectl get events";

@@ -1,4 +1,4 @@
-{ config, pkgs, pwaerospace, sketchybar-config, ... }:
+{ config, pkgs, ... }:
 
 let
   system = pkgs.stdenv.hostPlatform.system;
@@ -16,15 +16,7 @@ in {
   ];
 
   environment.systemPackages =
-    [
-      pwaerospace.packages.${system}.aerospace-standalone
-      sketchybar-config.packages.${system}.sketchybar-standalone
-    ]
-    ++ (with pkgs; [
-
-      # Desktop
-      sketchybar-app-font
-    
+    (with pkgs; [
     # Communication
     slack
     zoom-us
