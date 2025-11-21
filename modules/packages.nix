@@ -122,6 +122,18 @@ in {
     ansible
     opentofu
     terragrunt
+    terraform-docs
+    tflint
+    infracost
+    checkov
+    tfsec
+    terrascan
+    hcledit
+    pre-commit
+    trivy
+    graphviz
+    tfupdate
+
 
     # Container tools
     podman
@@ -156,6 +168,7 @@ in {
       "node"
       "pngquant"
       "act"
+      "telnet"
     ];
 
     taps = [

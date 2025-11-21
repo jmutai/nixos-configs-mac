@@ -39,6 +39,7 @@
   kdf   = "kubectl delete -f";
   kgs   = "kubectl get services";
   kgsec = "kubectl get secrets";
+  kgsectf = "kubectl get secrets \$1 -o jsonpath='{.data.tfstate}' | base64 -d | gunzip";
   kgn   = "kubectl get nodes";
   kexec = "kubectl exec -it";
   kge   = "kubectl get events";
@@ -71,10 +72,12 @@
   tgp   = "terragrunt plan";
   tga   = "terragrunt apply";
   tgaa  = "terragrunt apply -auto-approve";
-  tgri   = "terragrunt run --all init";
-  tgrp   = "terragrunt run --all plan";
-  tgra   = "terragrunt run --all apply";
-  tgraa  = "terragrunt run --all --non-interactive apply";
+  tgri  = "terragrunt run --all init";
+  tgrp  = "terragrunt run --all plan";
+  tgra  = "terragrunt run --all apply";
+  tgraa = "terragrunt run --all --non-interactive apply";
+  tgd   = "terragrunt destroy";
+  tgda  = "terragrunt destroy -auto-approve";
 
   # Docker/Podman aliases
   d      = "docker";
@@ -107,7 +110,7 @@
   free     = "top -l 1 -s 0 | grep PhysMem";
   cpu      = "sysctl -a | grep machdep.cpu";
   gpu      = "system_profiler SPDisplaysDataType";
-  projects = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects projects'';
+  projects = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects'';
   update   = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && sudo darwin-rebuild switch --flake .'';
   upgrade  = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && nix flake update && sudo darwin-rebuild switch --flake .'';
   cleanup  = "nix-collect-garbage -d";
