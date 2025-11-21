@@ -84,6 +84,7 @@
         configuration 
         home-manager.darwinModules.home-manager
         {
+          networking.hostName = hostname;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {

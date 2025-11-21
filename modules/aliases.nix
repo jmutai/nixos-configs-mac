@@ -111,7 +111,7 @@
   cpu      = "sysctl -a | grep machdep.cpu";
   gpu      = "system_profiler SPDisplaysDataType";
   projects = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects'';
-  update   = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && sudo darwin-rebuild switch --flake .'';
+  update   = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && sudo darwin-rebuild switch --flake .#$(hostname | sed "s/\./-/g")'';
   upgrade  = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && nix flake update && sudo darwin-rebuild switch --flake .'';
   cleanup  = "nix-collect-garbage -d";
   
