@@ -7,28 +7,32 @@ in {
   xdg.configFile."ghostty/config".text = ''
     # Basic behavior
     shell-integration = detect
-    scrollback-limit = 2000000000
-    window-inherit-working-directory = false
+    scrollback-limit = 100000
+    window-inherit-working-directory = true
     command = /run/current-system/sw/bin/zsh
 
-    # Font
-    font-family = "BerkeleyMono Nerd Font"
+    # Font Settings - Nerd Fonts for CLI
+    font-family = "JetBrainsMono Nerd Font", "FiraCode Nerd Font", "MesloLGS Nerd Font", "Hack Nerd Font", "SF Mono", Monaco, monospace
+    font-size = 12
     font-thicken = true
-    font-size = 13.5
     font-feature = -calt,-liga,-dlig
-    adjust-cell-height = 77%
-    adjust-underline-thickness = 10%
-    adjust-underline-position = 3
+    adjust-cell-height = 50%
+    adjust-underline-thickness = 50%
+    adjust-underline-position = 0
 
-    # Cursor
-    cursor-style = underline
+    # Window Appearance
+    window-padding-x = 12
+    window-padding-y = 8
+
+    # Cursor Settings
+    cursor-style = block
 
     # macOS specific
     macos-option-as-alt = true
     macos-icon = holographic
-    macos-titlebar-style = tabs
+    macos-titlebar-style = hidden
 
-    # Colors (edo theme)
+    # Colors (Edo theme)
     foreground = ${strip c.text}
     background = ${strip c.base}
     selection-foreground = ${strip c.text}
@@ -36,7 +40,7 @@ in {
     cursor-color = ${strip c.rosewater}
     cursor-text = ${strip c.crust}
 
-    # Palette
+    # ANSI Color Palette
     palette = 0=${strip c.surface1}
     palette = 1=${strip c.red}
     palette = 2=${strip c.green}
@@ -54,13 +58,16 @@ in {
     palette = 14=${strip c.teal}
     palette = 15=${strip c.subtext0}
 
-    # Transparency
-    background-opacity = 0.95
-    background-blur-radius = 24
+    # Transparency & Visual Effects
+    background-opacity = 0.92
+    background-blur-radius = 30
     alpha-blending = native
     window-colorspace = display-p3
 
-    # Window title
-    window-title-font-family = "BerkeleyMono Nerd Font"
+    # Window Title
+    window-title-font-family = "JetBrainsMono Nerd Font", "SF Mono", Monaco
+
+    # Input & Keyboard
+    copy-on-select = true
   '';
 }

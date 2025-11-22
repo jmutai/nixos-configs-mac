@@ -10,6 +10,7 @@
     ./modules/home/programs/tmux.nix
     ./modules/home/programs/htop.nix
     ./modules/home/programs/ghostty.nix
+    ./modules/home/programs/tabby.nix
     ./modules/home/programs/cursor.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should manage

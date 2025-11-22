@@ -13,6 +13,7 @@ in {
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
+    nerd-fonts.hack
   ];
 
   environment.systemPackages =
@@ -29,7 +30,7 @@ in {
 
     # Browsers
     firefox
-    
+
     # Development Tools
     gh
     docker-compose
@@ -53,13 +54,13 @@ in {
     zsh
     zsh-completions
     bash-completion
-        
+
     # Essential CLI tools
     htop
     btop # Modern alternative to htop
     bottom # Modern alternative to htop
     zellij
-    neofetch 
+    neofetch
     fastfetch
     git
     curl
@@ -78,7 +79,7 @@ in {
 
     # Screenshot tools
     flameshot
-    
+
     # languages and runtimes
     python3
     go
@@ -92,6 +93,7 @@ in {
     meson
     act
     lua
+    nixpkgs-fmt  # Nix formatter for Nix IDE extension
 
       # Media
       aria2
@@ -107,7 +109,7 @@ in {
     zsh-completions
 
     # Productivity
-    google-antigravity
+    #google-antigravity
 
     # Containerization
     kubectl
@@ -165,6 +167,7 @@ in {
       "pngquant"
       "act"
       "telnet"
+      "mise"
     ];
 
     taps = [

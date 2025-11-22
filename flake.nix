@@ -62,6 +62,9 @@
       # The platform
       nixpkgs = {
         hostPlatform = "aarch64-darwin";  # Change to x86_64-darwin for Intel
+        #overlays = [
+        #  antigravity-nix.overlays.default
+        #];
       };
 
       # User configuration
