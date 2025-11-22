@@ -2,10 +2,9 @@
 
 let
   # List of extensions to automatically install
-  cursorExtensions = [
+  antigravityExtensions = [
     # Language Support
     "ms-python.python"
-    "ms-python.vscode-pylance"
     "golang.go"
     "rust-lang.rust-analyzer"
 
@@ -57,11 +56,11 @@ let
   ];
 in
 {
-  # Manage Cursor IDE configuration files
-  # Cursor stores configs in ~/Library/Application Support/Cursor/User/
+  # Manage Antigravity IDE configuration files
+  # Antigravity stores configs in ~/Library/Application Support/Antigravity/User/
   # Since this is macOS-specific, we use home.file instead of xdg.configFile
 
-  home.file."Library/Application Support/Cursor/User/settings.json" = {
+  home.file."Library/Application Support/Antigravity/User/settings.json" = {
     force = true;
     text = ''
     {
@@ -226,7 +225,7 @@ in
   '';
   };
 
-  home.file."Library/Application Support/Cursor/User/keybindings.json" = {
+  home.file."Library/Application Support/Antigravity/User/keybindings.json" = {
     force = true;
     text = ''
     // Place your key bindings in this file to override the defaults
@@ -239,14 +238,14 @@ in
   '';
   };
 
+
   # Recommended extensions list
-  # This file helps Cursor suggest extensions to install
-  home.file."Library/Application Support/Cursor/User/extensions.json".text = ''
+  # This file helps Antigravity suggest extensions to install
+  home.file."Library/Application Support/Antigravity/User/extensions.json".text = ''
     {
       "recommendations": [
         // Language Support
         "ms-python.python",
-        "ms-python.vscode-pylance",
         "golang.go",
         "rust-lang.rust-analyzer",
         "nix-community.nixvim",
@@ -297,45 +296,45 @@ in
     }
   '';
 
-  # Automatically install Cursor extensions
+  # Automatically install Antigravity extensions
   # This runs after Home Manager files are set up
-  home.activation.installCursorExtensions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    echo "Installing Cursor extensions..."
+  home.activation.installAntigravityExtensions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    echo "Installing Antigravity extensions..."
 
-    # Find Cursor CLI - try common locations
-    CURSOR_CLI=""
-    if [ -f "/Applications/Cursor.app/Contents/Resources/app/bin/cursor" ]; then
-      CURSOR_CLI="/Applications/Cursor.app/Contents/Resources/app/bin/cursor"
-    elif [ -f "$HOME/Applications/Cursor.app/Contents/Resources/app/bin/cursor" ]; then
-      CURSOR_CLI="$HOME/Applications/Cursor.app/Contents/Resources/app/bin/cursor"
-    elif command -v cursor >/dev/null 2>&1; then
-      CURSOR_CLI="cursor"
+    # Find Antigravity CLI - try common locations
+    ANTIGRAVITY_CLI=""
+    if [ -f "/Applications/Antigravity.app/Contents/Resources/app/bin/antigravity" ]; then
+      ANTIGRAVITY_CLI="/Applications/Antigravity.app/Contents/Resources/app/bin/antigravity"
+    elif [ -f "$HOME/Applications/Antigravity.app/Contents/Resources/app/bin/antigravity" ]; then
+      ANTIGRAVITY_CLI="$HOME/Applications/Antigravity.app/Contents/Resources/app/bin/antigravity"
+    elif command -v antigravity >/dev/null 2>&1; then
+      ANTIGRAVITY_CLI="antigravity"
     fi
 
-    if [ -z "$CURSOR_CLI" ]; then
-      echo "Warning: Cursor CLI not found. Extensions will not be installed automatically."
-      echo "Please install Cursor first, or install extensions manually from the Extensions view."
+    if [ -z "$ANTIGRAVITY_CLI" ]; then
+      echo "Warning: Antigravity CLI not found. Extensions will not be installed automatically."
+      echo "Please install Antigravity first, or install extensions manually from the Extensions view."
       exit 0
     fi
 
     # Uninstall spell checker if present
     echo "Removing spell checker extension if installed..."
-    $CURSOR_CLI --uninstall-extension "streetsidesoftware.code-spell-checker" 2>/dev/null || true
+    "$ANTIGRAVITY_CLI" --uninstall-extension "streetsidesoftware.code-spell-checker" 2>/dev/null || true
 
     # Get list of already installed extensions
-    INSTALLED_EXTS=$($CURSOR_CLI --list-extensions 2>/dev/null || echo "")
+    INSTALLED_EXTS=$("$ANTIGRAVITY_CLI" --list-extensions 2>/dev/null || echo "")
 
     # Install only missing extensions
     INSTALLED_COUNT=0
     SKIPPED_COUNT=0
 
-    for ext in ${builtins.concatStringsSep " " (map (ext: "\"${ext}\"") cursorExtensions)}; do
+    for ext in ${builtins.concatStringsSep " " (map (ext: "\"${ext}\"") antigravityExtensions)}; do
       if echo "$INSTALLED_EXTS" | grep -q "^$ext$"; then
         echo "✓ Extension already installed: $ext"
         SKIPPED_COUNT=$((SKIPPED_COUNT + 1))
       else
         echo "Installing extension: $ext"
-        if $CURSOR_CLI --install-extension "$ext" 2>/dev/null; then
+        if "$ANTIGRAVITY_CLI" --install-extension "$ext" 2>/dev/null; then
           INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
         else
           echo "  ⚠ Failed to install: $ext"
@@ -344,7 +343,6 @@ in
     done
 
     echo ""
-    echo "Cursor extensions: $INSTALLED_COUNT installed, $SKIPPED_COUNT already present"
+    echo "Antigravity extensions: $INSTALLED_COUNT installed, $SKIPPED_COUNT already present"
   '';
 }
-

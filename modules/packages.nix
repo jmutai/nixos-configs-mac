@@ -68,7 +68,6 @@ in {
     tree
     ripgrep  # Fast grep alternative
     fzf      # Fuzzy finder
-    bat      # Better cat
     eza      # Better ls
     tmux
     iproute2mac
@@ -101,6 +100,8 @@ in {
       ffmpeg
       spotify
       git-crypt
+      nil
+      nixd
     ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [

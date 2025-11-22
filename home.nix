@@ -12,6 +12,7 @@
     ./modules/home/programs/ghostty.nix
     ./modules/home/programs/tabby.nix
     ./modules/home/programs/cursor.nix
+    ./modules/home/programs/antigravity.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should manage
   home.stateVersion = "25.05";
