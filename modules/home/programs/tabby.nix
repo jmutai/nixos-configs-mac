@@ -11,8 +11,6 @@ in {
     force = true;
     text = ''
 version: 7
-profiles: []
-groups: []
 configSync:
   parts: {}
 hotkeys:
@@ -42,9 +40,8 @@ terminal:
       - ${strip c.pink}
       - ${strip c.teal}
       - ${strip c.subtext0}
-  font:
-    size: 12
-    family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", "MesloLGS Nerd Font", "Hack Nerd Font", "SF Mono", Monaco, monospace
+  font: "JetBrainsMono Nerd Font"
+  fontSize: 13
   backgroundOpacity: 0.92
   ligatures: true
   cursorBlink: true
@@ -55,18 +52,10 @@ terminal:
   copyOnSelect: true
   scrollbackLines: 10000
 ssh: {}
-clickableLinks:
-  enabled: true
-  modifiers: cmd
-accessibility:
-  reduceMotion: false
-appearance:
-  theme: dark
-  opacity: 0.92
-  frame: native
-  vibrancy: true
-hacks:
-  macosOptionIsMeta: true
+clickableLinks: {}
+accessibility: {}
+appearance: {}
+hacks: {}
 providerBlacklist: []
 commandBlacklist: []
 enableWelcomeTab: false
