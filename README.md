@@ -565,6 +565,14 @@ Then switch to a specific generation:
 sudo darwin-rebuild switch --rollback <generation-number>
 ```
 
+## Personal notes
+
+```bash
+ln -sfn ~/.cheats/.p10k.zsh ~/.p10k.zsh
+ln -sfn ~/.cheats/.p10k.zsh ~/.config/p10k.zsh
+rm -rf ~/.ssh
+ln -sfn ~/.cheats/.ssh/ ~/.ssh
+```
 ## Additional Resources
 
 - [nix-darwin Documentation](https://github.com/nix-darwin/nix-darwin)

@@ -19,9 +19,11 @@
     agenix.url = "github:ryantm/agenix";
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    antigravity-nix.url = "github:jacopone/antigravity-nix";
+    antigravity-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, agenix, nixvim }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, agenix, nixvim, antigravity-nix }:
   let
     # ============================================================================
     # Configuration Variables - Edit these to customize your setup

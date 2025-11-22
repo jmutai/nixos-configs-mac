@@ -26,7 +26,6 @@ in {
     nushell
     kitty
     alacritty
-    tabby
 
     # Browsers
     firefox
@@ -72,6 +71,7 @@ in {
     eza      # Better ls
     tmux
     iproute2mac
+    fd
 
     # File management
     ranger
@@ -102,8 +102,12 @@ in {
     ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
+    # CLI helpers
     nnn
     zsh-completions
+
+    # Productivity
+    google-antigravity
 
     # Containerization
     kubectl
@@ -198,6 +202,8 @@ in {
       "font-sf-mono"
       "font-sf-pro"
       "sf-symbols"
+      "tabby"
+      "keepassxc"
     ];
 
     onActivation.cleanup = "zap";
