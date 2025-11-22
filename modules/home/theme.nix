@@ -1,4 +1,4 @@
-{
+let
   # ============================================================================
   # Utility Functions
   # ============================================================================
@@ -157,4 +157,7 @@
     author = "Custom";
     description = "A carefully crafted dark theme with excellent contrast and readability";
   };
+in
+{
+  inherit colors rawHexValue hexToRgb semantic diff ui terminal meta;
 }
