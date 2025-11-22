@@ -6,8 +6,8 @@ in {
     enable = true;
 
     font = {
-      name = "BerkeleyMono Nerd Font";
-      size = 14;
+      name = "JetBrainsMono Nerd Font";
+      size = 13;
     };
 
     settings = {
@@ -23,19 +23,21 @@ in {
       tab_bar_align = "left";
       tab_bar_style = "powerline";
       tab_powerline_style = "slanted";
-      tab_bar_min_tabs = 2;
+      tab_bar_min_tabs = 1;
       tab_activity_symbol = "none";
-      tab_separator = "\"\"";
       bell_on_tab = false;
 
-      tab_title_template = "{fmt.bold}{tab.active_exe.replace('-zsh', 'zsh').replace('starship', 'zsh')}{fmt.nobold} {(lambda wd: wd[:5] + '...' + wd[-21:] if len(wd) > 30 else wd)(tab.active_wd.replace('/Users/jkmutai/Developer', '~/ ').replace('/Users/jkmutai', '~'))}";
+      tab_title_template = "{title}";
 
-      window_padding_width = 2;
-      window_padding_height = 0;
+      window_padding_width = 15;
+      window_padding_height = 15;
+      window_margin_width = 0;
 
       hide_window_decorations = "titlebar-only";
+      window_border_width = 0;
 
-      cursor_shape = "underline";
+      cursor_shape = "block";
+      cursor_blink_interval = 0.5;
 
       editor = "/run/current-system/sw/bin/nvim";
       shell = "/run/current-system/sw/bin/zsh";
@@ -49,7 +51,7 @@ in {
 
       # edo theme colors
       foreground = c.text;
-      background = c.base;
+      background = c.mantle;
       selection_foreground = "none";
       selection_background = c.surface2;
 
@@ -65,14 +67,15 @@ in {
       wayland_titlebar_color = "system";
       macos_titlebar_color = "system";
 
-      active_tab_foreground = c.crust;
-      active_tab_background = c.blue;
-      inactive_tab_foreground = c.text;
+      active_tab_foreground = c.text;
+      active_tab_background = c.surface1;
+      inactive_tab_foreground = c.subtext1;
       inactive_tab_background = c.base;
-      tab_bar_background = c.crust;
+      tab_bar_background = c.base;
 
-      background_opacity = "0.95";
-      background_blur = 24;
+      background_opacity = "0.92";
+      background_blur = 30;
+      dynamic_background_opacity = "yes";
 
       mark1_foreground = c.crust;
       mark1_background = c.lavender;
@@ -108,7 +111,7 @@ in {
       color7 = c.subtext1;
       color15 = c.subtext0;
 
-      disable_ligatures = "always";
+      disable_ligatures = "never";
     };
 
     keybindings = {
@@ -127,12 +130,24 @@ in {
     };
 
     extraConfig = ''
-      modify_font underline_thickness 100%
-      modify_font underline_position 3
-      modify_font baseline 0.5
-      modify_font cell_height 152%
+      # Font adjustments - match Ghostty settings
+      modify_font underline_thickness 50%
+      modify_font underline_position 0
+      modify_font cell_height 110%
 
+      # Disable bells
+      enable_audio_bell no
+      visual_bell_duration 0.0
+
+      # Mouse support
       mouse_map cmd+click open_url
+      copy_on_select yes
+      strip_trailing_spaces never
+
+      # Window appearance
+      remember_window_size yes
+      initial_window_width 1200
+      initial_window_height 800
     '';
   };
 }

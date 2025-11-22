@@ -1,4 +1,4 @@
-{ config, pkgs, pwaerospace, sketchybar-config, ... }:
+{ config, pkgs, ... }:
 
 let
   system = pkgs.stdenv.hostPlatform.system;
@@ -13,18 +13,11 @@ in {
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
+    nerd-fonts.hack
   ];
 
   environment.systemPackages =
-    [
-      pwaerospace.packages.${system}.aerospace-standalone
-      sketchybar-config.packages.${system}.sketchybar-standalone
-    ]
-    ++ (with pkgs; [
-
-      # Desktop
-      sketchybar-app-font
-    
+    (with pkgs; [
     # Communication
     slack
     zoom-us
@@ -34,11 +27,10 @@ in {
     nushell
     kitty
     alacritty
-    tabby
 
     # Browsers
     firefox
-    
+
     # Development Tools
     gh
     docker-compose
@@ -62,13 +54,13 @@ in {
     zsh
     zsh-completions
     bash-completion
-        
+
     # Essential CLI tools
     htop
     btop # Modern alternative to htop
     bottom # Modern alternative to htop
     zellij
-    neofetch 
+    neofetch
     fastfetch
     git
     curl
@@ -76,17 +68,17 @@ in {
     tree
     ripgrep  # Fast grep alternative
     fzf      # Fuzzy finder
-    bat      # Better cat
     eza      # Better ls
     tmux
     iproute2mac
+    fd
 
     # File management
     ranger
 
     # Screenshot tools
     flameshot
-    
+
     # languages and runtimes
     python3
     go
@@ -100,6 +92,7 @@ in {
     meson
     act
     lua
+    nixpkgs-fmt  # Nix formatter for Nix IDE extension
 
       # Media
       aria2
@@ -107,11 +100,17 @@ in {
       ffmpeg
       spotify
       git-crypt
+      nil
+      nixd
     ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
+    # CLI helpers
     nnn
     zsh-completions
+
+    # Productivity
+    #google-antigravity
 
     # Containerization
     kubectl
@@ -169,6 +168,7 @@ in {
       "pngquant"
       "act"
       "telnet"
+      "mise"
     ];
 
     taps = [
@@ -206,6 +206,8 @@ in {
       "font-sf-mono"
       "font-sf-pro"
       "sf-symbols"
+      "tabby"
+      "keepassxc"
     ];
 
     onActivation.cleanup = "zap";
