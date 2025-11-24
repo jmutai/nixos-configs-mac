@@ -124,7 +124,7 @@ in {
     terraform-docs
     tflint
     infracost
-    checkov
+    # checkov  # Temporarily disabled due to pyarrow build issue
     tfsec
     terrascan
     hcledit
