@@ -692,6 +692,13 @@ rm -rf ~/.ssh
 ln -sfn ~/.cheats/.ssh/ ~/.ssh
 ```
 
+Disable iPhone apps showing in Spotlight search:
+
+1. Open System Settings ( menu > System Settings).
+2. Click **Spotlight** in the sidebar (or search for "Spotlight" in the top search bar).
+3. Under **Results from System**, find **iPhone Apps** - it might be a checkbox or toggle.
+4. Uncheck to off "iPhone Apps".
+
 ## Additional Resources
 
 - [nix-darwin Documentation](https://github.com/nix-darwin/nix-darwin)
