@@ -30,10 +30,13 @@ A declarative macOS system configuration managed with [nix-darwin](https://githu
 - 🎨 **System Configuration**: Dock, Finder, Trackpad, Keyboard, and macOS preferences
 - 📦 **Package Management**: System packages via Nix and GUI apps via Homebrew
 - 🛠️ **Development Tools**: Kubernetes, Docker, Terraform/OpenTofu, and more
-- 🐚 **Shell Configuration**: Zsh with Oh My Zsh, Powerlevel10k, and useful aliases
-- 📝 **Neovim Setup**: NixVim with LSP, Telescope, and other plugins
+- 🐚 **Shell Configuration**: Zsh with Starship prompt and useful aliases
+- 📝 **Editor Setup**: NixVim (Neovim) and Cursor IDE with auto-installed extensions
+- 🖥️ **Terminal Emulators**: Fully configured Kitty, Ghostty, and Tabby with Edo theme
+- 🎨 **Theme System**: Custom Edo color theme with semantic colors
 - 🔐 **Security**: Touch ID for sudo, system hardening options
 - ⚡ **Optimizations**: Fast key repeat, dock animations, and system tweaks
+- ⏰ **Menu Bar Apps**: Clock-rs with 24-hour time display
 
 ## Prerequisites
 
@@ -223,64 +226,116 @@ This configuration uses:
 ### Key Configuration Files
 
 - `flake.nix`: Main flake configuration - inputs, outputs, and system setup
-- `modules/packages.nix`: System packages installed via Nix
-- `modules/homebrew.nix`: Homebrew casks (GUI applications)
-- `modules/system-defaults.nix`: macOS system settings and preferences
-- `modules/nix.nix`: Nix configuration settings
-- `home.nix`: User configuration - shell, git, user packages
+- `home.nix`: User configuration - imports all program modules
+- `modules/packages.nix`: System packages installed via Nix and Homebrew
+- `modules/system-settings.nix`: macOS system settings and preferences
+- `modules/nix-core.nix`: Nix configuration settings
 - `modules/aliases.nix`: Shell aliases (git, kubectl, docker, etc.)
+- `modules/keyboard-remap.nix`: Keyboard remapping configuration
 - `nixvim.nix`: Neovim configuration - plugins, themes, LSP servers
+
+### Program Configuration Modules
+
+All user programs are configured in `modules/home/programs/`:
+
+- `zsh.nix`: Zsh shell with Starship prompt
+- `cursor.nix`: Cursor IDE with extensions and settings
+- `kitty.nix`: Kitty terminal configuration
+- `ghostty.nix`: Ghostty terminal configuration
+- `tabby.nix`: Tabby terminal configuration
+- `git.nix`: Git configuration
+- `bat.nix`: Bat (cat replacement) configuration
+- `fzf.nix`: Fuzzy finder configuration
+- `tmux.nix`: Tmux configuration
+- `starship.nix`: Starship prompt configuration
+- `clock-rs.nix`: Clock-rs menu bar app
+- `antigravity.nix`: Antigravity configuration
+- `htop.nix`: Htop configuration
+- `theme.nix`: Edo color theme definition
 
 ## What's Included
 
 ### System Packages (via Nix)
 
 - **Communication**: Slack, Zoom, Discord
-- **Terminals**: Kitty, Alacritty, Tabby, Ghostty
+- **Terminals**: Kitty, Alacritty (configured: Kitty, Ghostty, Tabby)
 - **Browsers**: Firefox
-- **Development**: VS Code, GitHub CLI, Docker Compose, Lazydocker
-- **Productivity**: Obsidian, Joplin Desktop
-- **Editors**: Neovim, Vim
-- **CLI Tools**: Git, curl, wget, tree, ripgrep, fzf, bat, eza, tmux
-- **System Tools**: htop, btop, neofetch, ranger
-- **Media**: Spotify
+- **Development**: GitHub CLI, Docker Compose, Lazydocker, Devbox
+- **Productivity**: Obsidian, Joplin Desktop, LazyGit
+- **Editors**: Neovim, Vim, Nix IDE tools (nil, nixd, nixpkgs-fmt)
+- **CLI Tools**: Git, curl, wget, tree, ripgrep, fzf, bat, eza, tmux, zellij
+- **System Tools**: htop, btop, bottom, neofetch, fastfetch, ranger
+- **Languages**: Python 3, Go, Lua, Node.js (via Homebrew)
+- **Media**: Spotify, yt-dlp, ffmpeg
+- **Fonts**: Nerd Fonts (Fira Code, JetBrains Mono, Meslo LG, Hack)
 
 ### GUI Applications (via Homebrew Cask)
 
-- Cursor (editor)
-- Brave, Vivaldi, Google Chrome
-- iTerm2
-- Notion
-- Transmission, qBittorrent
-- Docker Desktop, Podman Desktop
-- Karabiner Elements
-- Tailscale, Tunnelblick, Pritunl (VPN clients)
-- Beekeeper Studio
-- Microsoft Remote Desktop
+- **Editors**: Cursor (fully configured), Visual Studio Code, Zed
+- **Browsers**: Brave, Vivaldi, Google Chrome, Microsoft Edge
+- **Terminals**: iTerm2, Ghostty, Tabby
+- **Productivity**: Notion
+- **File Sharing**: Transmission, qBittorrent, Motrix
+- **Containers**: Docker Desktop, Podman Desktop
+- **System Tools**: Karabiner Elements, KeepassXC
+- **VPN**: Tailscale, Tunnelblick, Pritunl
+- **Database**: Beekeeper Studio
+- **Remote Access**: Microsoft Remote Desktop
+- **Fonts**: SF Mono, SF Pro, Maple Mono, SF Symbols
 
 ### Development Tools (via Home Manager)
 
-- **Kubernetes**: kubectl, k9s, Lens
+- **Kubernetes**: kubectl, k9s, Lens, Kubernetes Helm, Kustomize
 - **Containers**: Podman, podman-compose
-- **Infrastructure**: OpenTofu, Terragrunt, Ansible
-- **Cloud**: Google Cloud SDK
+- **Infrastructure**: OpenTofu, Terragrunt, Ansible, Terraform Docs, TFLint, Infracost
+- **Security Scanning**: Checkov, TFSec, Terrascan, Trivy
+- **Cloud**: Google Cloud SDK (with GKE auth plugin)
 - **Databases**: PostgreSQL, MariaDB
 - **VPN**: OpenVPN, Tailscale, NetBird
+- **Tools**: HCL Edit, Pre-commit, Graphviz, TFUpdate
 
 ### Shell Configuration
 
-- **Zsh** with Oh My Zsh
-- **Powerlevel10k** theme
+- **Zsh** with **Starship** prompt (modern, fast, and customizable)
 - **Plugins**: git, docker, kubectl, terraform, macos, fzf, and more
 - **Aliases**: Git shortcuts, kubectl aliases, Docker/Podman shortcuts, Terraform/OpenTofu shortcuts
-- **Modern Tools**: eza (ls), bat (cat), fzf (fuzzy finder)
+- **Modern Tools**: eza (ls), bat (cat), fzf (fuzzy finder), tmux, zellij
+- **Configuration**: Modular setup in `modules/home/programs/zsh.nix`
 
-### Neovim Configuration
+### Editor Configurations
 
+#### Neovim (NixVim)
 - **Theme**: Catppuccin
 - **Plugins**: Lualine, nvim-tree, Telescope, Treesitter
 - **LSP**: Nix (nil-ls), Lua (lua-ls)
 - **Features**: Syntax highlighting, file tree, fuzzy finder, status bar
+
+#### Cursor IDE
+- **Auto-installed Extensions**: Python, Go, Rust, Prettier, ESLint, GitLens, Terraform, Kubernetes, and more
+- **Font**: SF Mono for editor, Nerd Fonts for terminal
+- **Theme**: Cursor Dark Midnight
+- **Features**: Format on save, bracket pair colorization, minimap, and more
+- **Configuration**: Managed in `modules/home/programs/cursor.nix`
+
+### Terminal Emulators
+
+All terminals are configured with the **Edo theme** and **Nerd Fonts**:
+
+- **Kitty**: Powerline tabs, Edo theme, JetBrainsMono Nerd Font, optimized spacing
+- **Ghostty**: GPU-accelerated, Edo theme, Nerd Fonts, hidden titlebar
+- **Tabby**: Modern terminal, Edo theme, Nerd Fonts, configurable profiles
+
+Configuration files:
+- `modules/home/programs/kitty.nix`
+- `modules/home/programs/ghostty.nix`
+- `modules/home/programs/tabby.nix`
+
+### Theme System
+
+- **Edo Theme**: Custom dark theme with excellent contrast
+- **Semantic Colors**: Success, error, warning, info colors
+- **Terminal Colors**: Optimized ANSI color palette
+- **Configuration**: `modules/home/theme.nix`
 
 ### macOS System Settings
 
@@ -290,6 +345,7 @@ This configuration uses:
 - **Trackpad**: Tap to click, three-finger drag
 - **Security**: Touch ID for sudo, guest account disabled
 - **Screenshots**: PNG format, saved to `~/Pictures/Screenshots`
+- **Menu Bar**: Clock-rs with 24-hour time display
 
 ## Usage
 
@@ -381,11 +437,11 @@ update
 
 ### Changing Shell Configuration
 
-Edit `home.nix` for shell plugins and settings:
-- **Oh My Zsh plugins**: Edit `programs.zsh.oh-my-zsh.plugins`
-- **Custom shell functions**: Add to `programs.zsh.initContent`
+Edit `modules/home/programs/zsh.nix` for shell configuration:
+- **Starship prompt**: Configured in `modules/home/programs/starship.nix`
+- **Custom shell functions**: Add to `programs.zsh.initExtra`
 
-**Shell aliases** are now in `modules/aliases.nix`:
+**Shell aliases** are in `modules/aliases.nix`:
 - Edit `modules/aliases.nix` to add, modify, or remove aliases
 - This keeps all aliases organized in one place
 
@@ -397,16 +453,31 @@ Edit `home.nix` under `programs.git.settings.user`:
 - **Aliases**: Add custom git aliases under `alias.*`
 - **Editor**: Change `core.editor` if you prefer a different editor
 
-### Changing Neovim Configuration
+### Changing Editor Configurations
 
-Edit `nixvim.nix`:
+**Neovim**: Edit `nixvim.nix`:
 - **Theme**: Change `colorschemes.*.enable`
 - **Plugins**: Add to `plugins.*`
 - **Options**: Modify `opts.*`
 
+**Cursor IDE**: Edit `modules/home/programs/cursor.nix`:
+- **Extensions**: Add to `cursorExtensions` list (auto-installed)
+- **Settings**: Modify `settings.json` content
+- **Keybindings**: Modify `keybindings.json` content
+
+### Changing Terminal Configurations
+
+All terminals use the Edo theme from `modules/home/theme.nix`:
+
+- **Kitty**: Edit `modules/home/programs/kitty.nix`
+- **Ghostty**: Edit `modules/home/programs/ghostty.nix`
+- **Tabby**: Edit `modules/home/programs/tabby.nix`
+
+To change the theme colors, edit `modules/home/theme.nix`.
+
 ### Changing macOS Settings
 
-Edit `modules/system-defaults.nix`:
+Edit `modules/system-settings.nix`:
 - Dock settings: `system.defaults.dock.*`
 - Finder settings: `system.defaults.finder.*`
 - Keyboard settings: `system.defaults.NSGlobalDomain.*`
@@ -416,17 +487,33 @@ Edit `modules/system-defaults.nix`:
 
 ```
 nixos-configs-mac/
-├── flake.nix          # Main flake configuration with inputs and outputs
-├── flake.lock         # Locked dependencies (auto-generated)
-├── home.nix           # User configuration: shell, git, user packages
-├── nixvim.nix         # Neovim configuration: plugins, themes, LSP
-├── modules/           # Modular configuration files
-│   ├── packages.nix      # System packages (Nix)
-│   ├── homebrew.nix      # Homebrew casks (GUI apps)
-│   ├── system-defaults.nix # macOS system settings
-│   ├── nix.nix            # Nix configuration settings
-│   └── aliases.nix        # Shell aliases (git, kubectl, docker, etc.)
-└── README.md          # This file
+├── flake.nix                    # Main flake configuration with inputs and outputs
+├── flake.lock                   # Locked dependencies (auto-generated)
+├── home.nix                     # User configuration: imports all program modules
+├── nixvim.nix                   # Neovim configuration: plugins, themes, LSP
+├── modules/                     # Modular configuration files
+│   ├── packages.nix                # System packages (Nix) and Homebrew
+│   ├── system-settings.nix         # macOS system settings and preferences
+│   ├── nix-core.nix                # Nix configuration settings
+│   ├── keyboard-remap.nix          # Keyboard remapping configuration
+│   ├── aliases.nix                 # Shell aliases (git, kubectl, docker, etc.)
+│   └── home/                      # Home Manager program configurations
+│       ├── theme.nix                  # Edo color theme definition
+│       └── programs/                 # Individual program configurations
+│           ├── zsh.nix                  # Zsh with Starship
+│           ├── cursor.nix              # Cursor IDE configuration
+│           ├── kitty.nix               # Kitty terminal
+│           ├── ghostty.nix             # Ghostty terminal
+│           ├── tabby.nix               # Tabby terminal
+│           ├── git.nix                # Git configuration
+│           ├── bat.nix                # Bat configuration
+│           ├── fzf.nix                # Fuzzy finder
+│           ├── tmux.nix               # Tmux
+│           ├── starship.nix          # Starship prompt
+│           ├── clock-rs.nix          # Clock-rs menu bar app
+│           ├── antigravity.nix        # Antigravity
+│           └── htop.nix               # Htop
+└── README.md                    # This file
 ```
 
 **Benefits of this modular structure:**
@@ -457,7 +544,7 @@ sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 
 **Issue**: Package not available after installation
 
-**Solution**: 
+**Solution**:
 1. Check if the package name is correct in nixpkgs
 2. Rebuild: `update`
 3. Start a new terminal session
@@ -485,7 +572,7 @@ sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 
 **Issue**: `sudo: ... command not found` or permission denied
 
-**Solution**: 
+**Solution**:
 - Make sure you're using `sudo` for system-level changes
 - Verify your user has sudo privileges
 - Check file permissions if editing files directly
