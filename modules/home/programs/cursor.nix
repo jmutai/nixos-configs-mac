@@ -19,6 +19,7 @@ let
     # Git
     "eamodio.gitlens"
     "mhutchie.git-graph"
+    "github.vscode-github-actions"
 
     # UI & Themes
     "pkief.material-icon-theme"
