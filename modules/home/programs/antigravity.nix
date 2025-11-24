@@ -10,7 +10,6 @@ let
 
     # Formatting & Linting
     "esbenp.prettier-vscode"
-    "dbaeumer.vscode-eslint"
     "ms-python.black-formatter"
     "ms-python.isort"
     "ms-python.flake8"
@@ -37,7 +36,6 @@ let
 
     # Markdown
     "yzhang.markdown-all-in-one"
-    "davidanson.vscode-markdownlint"
 
     # Terminal
     "formulahendry.auto-rename-tag"
@@ -253,7 +251,6 @@ in
 
         // Formatting & Linting
         "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint",
         "ms-python.black-formatter",
         "ms-python.isort",
         "ms-python.flake8",
@@ -277,7 +274,6 @@ in
 
         // Markdown
         "yzhang.markdown-all-in-one",
-        "davidanson.vscode-markdownlint",
 
         // Terminal
         "formulahendry.auto-rename-tag",

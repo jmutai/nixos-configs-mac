@@ -105,13 +105,15 @@
   pprune = "podman system prune -af";
 
   # Gcloud aliases
-  gc     = "gcloud";
-  gac    = "gcloud auth list";
-  gcl    = "gcloud config list";
-  gsl    = "gcloud services list";
-  gal    = "gcloud auth login";
-  gaal   = "gcloud auth application-default login";
-  gat    = "gcloud auth application-default print-access-token";
+  gc      = "gcloud";
+  gcl     = "gcloud auth list";
+  gccl    = "gcloud config list";
+  gcsl    = "gcloud services list";
+  gcal    = "gcloud auth login";
+  gcaal   = "gcloud auth application-default login";
+  gcat    = "gcloud auth application-default print-access-token";
+  gcgp    = "gcloud config get-value project";
+  gcsp    = "gcloud config set project";
 
 
   # Custom + System
