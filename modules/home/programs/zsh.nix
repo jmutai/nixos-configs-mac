@@ -83,7 +83,7 @@
       eval "$(/opt/homebrew/bin/brew shellenv)"
 
       # Source custom functions from ~/.cheats/functions.sh
-      if [ -f ~/.cheats/functions.sh ]; then
+      if [[ -f ~/.cheats/functions.sh ]]; then
         source ~/.cheats/functions.sh
       fi
 
