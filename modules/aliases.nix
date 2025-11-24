@@ -7,16 +7,16 @@
   ll  = "eza -l --icons=always";
   la  = "eza -la --icons=always";
   cat = "bat --plain";
-  
+
   # Git shortcuts
   g  = "git";
   gs = "git status";
   ga = "git add";
-  gc = "git commit";
-  gp = "git push";
-  gl = "git pull";
+  gcm = "git commit -m";
+  gp  = "git push";
+  gl  = "git pull";
 
-  # kubectl aliases 
+  # kubectl aliases
   k     = "kubectl";
   kg    = "kubectl get";
   kn    = "kubectl-ns";
@@ -103,17 +103,26 @@
   prm    = "podman rm";
   prmi   = "podman rmi";
   pprune = "podman system prune -af";
-  
+
+  # Gcloud aliases
+  gc     = "gcloud";
+  gac    = "gcloud auth list";
+  gcl    = "gcloud config list";
+  gcs    = "gcloud services list";
+  gal    = "gcloud auth login";
+  gaal   = "gcloud auth application-default login";
+
+
   # Custom + System
   nf       = "neofetch";
   free     = "top -l 1 -s 0 | grep PhysMem";
   cpu      = "sysctl -a | grep machdep.cpu";
   gpu      = "system_profiler SPDisplaysDataType";
   projects = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects'';
-  update   = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && sudo darwin-rebuild switch --flake .#$(hostname | sed "s/\./-/g")'';
-  upgrade  = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && nix flake update && sudo darwin-rebuild switch --flake .'';
+  update   = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && sudo darwin-rebuild switch --flake ".#$(hostname | sed "s/\./-/g")"'';
+  upgrade  = ''cd ~/Library/"Mobile Documents"/com~apple~CloudDocs/projects/nixos-configs-mac && nix flake update && sudo darwin-rebuild switch --flake ".#$(hostname | sed "s/\./-/g")"'';
   cleanup  = "nix-collect-garbage -d";
-  
+
   # Navigation
   ".." = "cd ..";
   "..." = "cd ../..";
