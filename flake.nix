@@ -28,12 +28,12 @@
     # ============================================================================
     # Configuration Variables - Edit these to customize your setup
     # ============================================================================
-    
+
     # List of hostnames to generate configurations for
     # Add your hostnames here - darwin-rebuild will automatically use the correct one
     # You can check your hostname with: hostname
     hostnames = [
-      "macbook-pro-3"  # Current hostname: scutil --get HostName 
+      "macbook-pro-3"  # Current hostname: scutil --get HostName
       # Add more hostnames here as needed, e.g.:
       # "My-MacBook-Air"
       # "Work-MacBook"
@@ -73,18 +73,13 @@
         home = userHome;
         shell = pkgs.zsh;
       };
-
-      # Create screenshots directory
-      system.activationScripts.extraActivation.text = ''
-        mkdir -p ~/Pictures/Screenshots
-      '';
     };
 
     # Helper function to create darwin system configuration
     # This allows us to easily add configurations for multiple hostnames
     mkDarwinSystem = hostname: nix-darwin.lib.darwinSystem {
-      modules = [ 
-        configuration 
+      modules = [
+        configuration
         home-manager.darwinModules.home-manager
         {
           networking.hostName = hostname;
