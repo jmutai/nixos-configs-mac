@@ -103,6 +103,10 @@ in {
       git-crypt
       nil
       nixd
+
+      # Virtualization
+      vagrant
+      packer
     ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
@@ -172,6 +176,7 @@ in {
       "act"
       "telnet"
       "mise"
+      "just"
     ];
 
     taps = [
@@ -210,6 +215,7 @@ in {
       "font-sf-pro"
       "sf-symbols"
       "tabby"
+      "virtualbox"
       "keepassxc"
     ];
 

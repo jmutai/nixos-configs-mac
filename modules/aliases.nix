@@ -108,9 +108,10 @@
   gc     = "gcloud";
   gac    = "gcloud auth list";
   gcl    = "gcloud config list";
-  gcs    = "gcloud services list";
+  gsl    = "gcloud services list";
   gal    = "gcloud auth login";
   gaal   = "gcloud auth application-default login";
+  gat    = "gcloud auth application-default print-access-token";
 
 
   # Custom + System
