@@ -538,28 +538,6 @@ nixos-configs-mac/
 
 ## Troubleshooting
 
-### Build Fails
-
-**Issue**: `error: flake.nix:xxx:xxx: undefined variable`
-
-**Solution**:
-
- Make sure all flake inputs are properly defined. Run:
-
-```bash
-nix flake update
-```
-
-**Issue**: `error: cannot connect to socket`
-
-**Solution**:
-
- Make sure the Nix daemon is running:
-
-```bash
-sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
-```
-
 ### Packages Not Found
 
 **Issue**: Package not available after installation
