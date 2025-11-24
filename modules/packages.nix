@@ -22,6 +22,7 @@ in {
     slack
     zoom-us
     discord
+    teams
 
     # Shell, Terminals
     nushell
