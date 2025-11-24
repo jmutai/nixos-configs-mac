@@ -62,7 +62,6 @@ curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 
 [Determinate Nix Installer](https://github.com/DeterminateSystems/nix-installer) is the easiest and most reliable way to install Nix—as well as our longest-running project.
 
-
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
@@ -113,6 +112,7 @@ scutil --get LocalHostName
 ```
 
 **Automatic Detection (Recommended):**
+
 - `darwin-rebuild` will automatically detect and use your system's hostname when you run `darwin-rebuild switch --flake .`
 - Simply add your hostname to the `hostnames` list in `flake.nix` (see below)
 - After adding it once, it will work automatically on subsequent builds
@@ -151,7 +151,6 @@ You may see different values, they each serve a slightly different purpose.
 | **LocalHostName** | Used for Bonjour/AirDrop.                         | `macbook-pro`          |
 | **ComputerName**  | Visible name in System Settings → General → Sharing. | `Josphat’s MacBook Pro` |
 
-
 All configuration variables (hostnames, username) are now defined at the top of the `let` block for easy customization.
 
 **Update Username:**
@@ -189,6 +188,7 @@ sudo nix run nix-darwin -- switch --flake .
 ```
 
 This will:
+
 - Install all system packages
 - Configure macOS settings
 - Set up Home Manager
@@ -305,12 +305,14 @@ All user programs are configured in `modules/home/programs/`:
 ### Editor Configurations
 
 #### Neovim (NixVim)
+
 - **Theme**: Catppuccin
 - **Plugins**: Lualine, nvim-tree, Telescope, Treesitter
 - **LSP**: Nix (nil-ls), Lua (lua-ls)
 - **Features**: Syntax highlighting, file tree, fuzzy finder, status bar
 
 #### Cursor IDE
+
 - **Auto-installed Extensions**: Python, Go, Rust, Prettier, ESLint, GitLens, Terraform, Kubernetes, and more
 - **Font**: SF Mono for editor, Nerd Fonts for terminal
 - **Theme**: Cursor Dark Midnight
@@ -326,6 +328,7 @@ All terminals are configured with the **Edo theme** and **Nerd Fonts**:
 - **Tabby**: Modern terminal, Edo theme, Nerd Fonts, configurable profiles
 
 Configuration files:
+
 - `modules/home/programs/kitty.nix`
 - `modules/home/programs/ghostty.nix`
 - `modules/home/programs/tabby.nix`
@@ -370,6 +373,7 @@ sudo darwin-rebuild switch --flake .
 See `home.nix` for a complete list, but here are some highlights:
 
 **Git:**
+
 - `g` = git
 - `gs` = git status
 - `ga` = git add
@@ -377,18 +381,21 @@ See `home.nix` for a complete list, but here are some highlights:
 - `gp` = git push
 
 **Kubernetes:**
+
 - `k` = kubectl
 - `kgp` = kubectl get pods
 - `kl` = kubectl logs
 - `kexec` = kubectl exec -it
 
 **Docker/Podman:**
+
 - `d` = docker
 - `dc` = docker-compose
 - `p` = podman
 - `pc` = podman-compose
 
 **Terraform/OpenTofu:**
+
 - `tf` = tofu
 - `tg` = terragrunt
 - `tgaa` = terragrunt apply -auto-approve
@@ -438,16 +445,19 @@ update
 ### Changing Shell Configuration
 
 Edit `modules/home/programs/zsh.nix` for shell configuration:
+
 - **Starship prompt**: Configured in `modules/home/programs/starship.nix`
 - **Custom shell functions**: Add to `programs.zsh.initExtra`
 
 **Shell aliases** are in `modules/aliases.nix`:
+
 - Edit `modules/aliases.nix` to add, modify, or remove aliases
 - This keeps all aliases organized in one place
 
 ### Changing Git Configuration
 
 Edit `home.nix` under `programs.git.settings.user`:
+
 - **Name**: Change `user.name` to your git username
 - **Email**: Change `user.email` to your git email
 - **Aliases**: Add custom git aliases under `alias.*`
@@ -456,11 +466,13 @@ Edit `home.nix` under `programs.git.settings.user`:
 ### Changing Editor Configurations
 
 **Neovim**: Edit `nixvim.nix`:
+
 - **Theme**: Change `colorschemes.*.enable`
 - **Plugins**: Add to `plugins.*`
 - **Options**: Modify `opts.*`
 
 **Cursor IDE**: Edit `modules/home/programs/cursor.nix`:
+
 - **Extensions**: Add to `cursorExtensions` list (auto-installed)
 - **Settings**: Modify `settings.json` content
 - **Keybindings**: Modify `keybindings.json` content
@@ -478,6 +490,7 @@ To change the theme colors, edit `modules/home/theme.nix`.
 ### Changing macOS Settings
 
 Edit `modules/system-settings.nix`:
+
 - Dock settings: `system.defaults.dock.*`
 - Finder settings: `system.defaults.finder.*`
 - Keyboard settings: `system.defaults.NSGlobalDomain.*`
@@ -485,7 +498,7 @@ Edit `modules/system-settings.nix`:
 
 ## Project Structure
 
-```
+```bash
 nixos-configs-mac/
 ├── flake.nix                    # Main flake configuration with inputs and outputs
 ├── flake.lock                   # Locked dependencies (auto-generated)
@@ -517,6 +530,7 @@ nixos-configs-mac/
 ```
 
 **Benefits of this modular structure:**
+
 - **Better organization**: Each file has a single, clear purpose
 - **Easier maintenance**: Find and edit specific configurations quickly
 - **Cleaner files**: Main config files are more readable
@@ -528,14 +542,20 @@ nixos-configs-mac/
 
 **Issue**: `error: flake.nix:xxx:xxx: undefined variable`
 
-**Solution**: Make sure all flake inputs are properly defined. Run:
+**Solution**:
+
+ Make sure all flake inputs are properly defined. Run:
+
 ```bash
 nix flake update
 ```
 
 **Issue**: `error: cannot connect to socket`
 
-**Solution**: Make sure the Nix daemon is running:
+**Solution**:
+
+ Make sure the Nix daemon is running:
+
 ```bash
 sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 ```
@@ -545,6 +565,7 @@ sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 **Issue**: Package not available after installation
 
 **Solution**:
+
 1. Check if the package name is correct in nixpkgs
 2. Rebuild: `update`
 3. Start a new terminal session
@@ -554,6 +575,7 @@ sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 **Issue**: Homebrew casks not installing
 
 **Solution**:
+
 1. Verify Homebrew is installed: `which brew`
 2. Check if the cask name is correct: `brew search <app-name>`
 3. Manually install to verify: `brew install --cask <app-name>`
@@ -563,6 +585,7 @@ sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 **Issue**: Zsh configuration not loading
 
 **Solution**:
+
 1. Verify zsh is your default shell: `echo $SHELL`
 2. Check if home.nix is properly imported in flake.nix
 3. Rebuild: `update`
@@ -573,6 +596,7 @@ sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 **Issue**: `sudo: ... command not found` or permission denied
 
 **Solution**:
+
 - Make sure you're using `sudo` for system-level changes
 - Verify your user has sudo privileges
 - Check file permissions if editing files directly
@@ -582,11 +606,13 @@ sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 **Issue**: Nix store growing too large
 
 **Solution**: Run cleanup regularly:
+
 ```bash
 cleanup  # or: nix-collect-garbage -d
 ```
 
 You can also adjust the garbage collection settings in `flake.nix`:
+
 ```nix
 nix.gc = {
   automatic = true;
@@ -600,6 +626,7 @@ nix.gc = {
 ### Regular Updates
 
 **Update packages and configuration:**
+
 ```bash
 upgrade
 ```
@@ -607,6 +634,7 @@ upgrade
 This updates all flake inputs and rebuilds your system.
 
 **Update just packages (keep flake inputs locked):**
+
 ```bash
 update
 ```
@@ -619,7 +647,8 @@ Nix keeps old system generations for rollback. Clean them up periodically:
 cleanup
 ```
 
-Or manually:
+Or manually:\
+
 ```bash
 nix-collect-garbage -d
 ```
@@ -643,11 +672,13 @@ sudo darwin-rebuild switch --rollback
 ```
 
 Or list all generations:
+
 ```bash
 sudo darwin-rebuild --list-generations
 ```
 
 Then switch to a specific generation:
+
 ```bash
 sudo darwin-rebuild switch --rollback <generation-number>
 ```
@@ -660,6 +691,7 @@ ln -sfn ~/.cheats/.p10k.zsh ~/.config/p10k.zsh
 rm -rf ~/.ssh
 ln -sfn ~/.cheats/.ssh/ ~/.ssh
 ```
+
 ## Additional Resources
 
 - [nix-darwin Documentation](https://github.com/nix-darwin/nix-darwin)
