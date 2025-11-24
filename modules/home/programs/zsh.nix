@@ -82,6 +82,13 @@
       # Homebrew
       eval "$(/opt/homebrew/bin/brew shellenv)"
 
+      # Crossplane completions
+      if command -v crossplane &> /dev/null; then
+        # Try both syntaxes in case the command format varies by version
+        source <(crossplane completions 2>/dev/null) || \
+        source <(crossplane completions zsh 2>/dev/null) || true
+      fi
+
       # Source custom functions from ~/.cheats/functions.sh
       if [[ -f ~/.cheats/functions.sh ]]; then
         source ~/.cheats/functions.sh

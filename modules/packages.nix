@@ -118,6 +118,7 @@ in {
     kustomize
 
     # Infrastructure as Code
+    crossplane-cli
     ansible
     opentofu
     terragrunt
@@ -141,6 +142,7 @@ in {
     lens
 
     # Cloud CLI tools; gcloud components list
+    awscli
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
 
     # Database clients
