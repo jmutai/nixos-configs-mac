@@ -107,6 +107,7 @@
   # Gcloud aliases
   gc      = "gcloud";
   gcl     = "gcloud auth list";
+  gcpl    = "gcloud projects list";
   gccl    = "gcloud config list";
   gcsl    = "gcloud services list";
   gcal    = "gcloud auth login";
