@@ -73,7 +73,6 @@ in {
     tmux
     iproute2mac
     fd
-
     # File management
     ranger
 
@@ -217,6 +216,8 @@ in {
       "tabby"
       "virtualbox"
       "keepassxc"
+      "vnc-viewer"
+      "tigervnc-viewer"
     ];
 
     onActivation.cleanup = "zap";
