@@ -13,6 +13,7 @@
     ./modules/home/programs/tabby.nix
     ./modules/home/programs/cursor.nix
     ./modules/home/programs/antigravity.nix
+    ./modules/home/programs/python.nix
   ];
 
   # Create Screenshots directory for macOS screenshots
