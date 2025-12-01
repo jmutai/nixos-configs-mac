@@ -26,11 +26,11 @@
       # Add Python packages from nixpkgs here:
       # reportlab  # If available: nix search nixpkgs python3Packages.reportlab
       reportlab
-      # numpy
-      # pandas
-      # requests
-      # setuptools
-      # wheel
+      numpy
+      pandas
+      requests
+      setuptools
+      wheel
     ]))
   ];
 }
