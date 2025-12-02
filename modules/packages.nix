@@ -106,6 +106,10 @@ in {
       # Virtualization
       vagrant
       packer
+
+      # VPN
+      netbird
+      netbird-ui
     ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
@@ -156,7 +160,7 @@ in {
     # VPN clients
     openvpn    # OpenVPN CLI
     tailscale  # Tailscale CLI
-    netbird    # NetBird CLI
+    # netbird    # NetBird CLI
   ];
 
   homebrew = {
