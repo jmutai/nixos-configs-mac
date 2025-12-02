@@ -13,6 +13,7 @@ let
     "ms-python.black-formatter"
     "ms-python.isort"
     "ms-python.flake8"
+    "ms-vscode.makefile-tools"
 
     # Git
     "eamodio.gitlens"

@@ -176,6 +176,7 @@ in {
       "telnet"
       "mise"
       "just"
+      "qemu"
     ];
 
     taps = [
