@@ -223,6 +223,7 @@ in {
       "keepassxc"
       "vnc-viewer"
       "tigervnc-viewer"
+      "balenaetcher"
     ];
 
     onActivation.cleanup = "zap";
