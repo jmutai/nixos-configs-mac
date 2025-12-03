@@ -181,6 +181,7 @@ in {
       "mise"
       "just"
       "qemu"
+      "grpcurl"
     ];
 
     taps = [
