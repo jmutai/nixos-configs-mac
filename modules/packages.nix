@@ -98,7 +98,6 @@ in {
       aria2
       yt-dlp
       ffmpeg
-      spotify
       git-crypt
       nil
       nixd
@@ -106,10 +105,6 @@ in {
       # Virtualization
       vagrant
       packer
-
-      # VPN
-      # netbird
-      # netbird-ui
     ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
@@ -160,7 +155,6 @@ in {
     # VPN clients
     openvpn    # OpenVPN CLI
     tailscale  # Tailscale CLI
-    # netbird    # NetBird CLI
   ];
 
   homebrew = {
@@ -221,6 +215,9 @@ in {
       "sf-symbols"
       "tabby"
       "virtualbox"
+      "spotify"
+      "netbird"
+      "netbird-ui"
       "keepassxc"
       "vnc-viewer"
       "tigervnc-viewer"

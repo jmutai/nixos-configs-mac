@@ -14,7 +14,6 @@
     ./modules/home/programs/cursor.nix
     ./modules/home/programs/antigravity.nix
     ./modules/home/programs/python.nix
-    ./modules/home/programs/netbird.nix
   ];
 
   # Create Screenshots directory for macOS screenshots
