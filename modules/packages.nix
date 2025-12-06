@@ -108,8 +108,8 @@ in {
       packer
 
       # VPN
-      netbird
-      netbird-ui
+      # netbird
+      # netbird-ui
     ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
