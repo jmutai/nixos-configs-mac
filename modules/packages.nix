@@ -176,6 +176,7 @@ in {
       "just"
       "qemu"
       "grpcurl"
+      "netbirdio/tap/netbird"
     ];
 
     taps = [
@@ -216,12 +217,11 @@ in {
       "tabby"
       "virtualbox"
       "spotify"
-      "netbird"
-      "netbird-ui"
       "keepassxc"
       "vnc-viewer"
       "tigervnc-viewer"
       "balenaetcher"
+      "netbirdio/tap/netbird-ui"
     ];
 
     onActivation.cleanup = "zap";
