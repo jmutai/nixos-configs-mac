@@ -33,10 +33,10 @@
     # Add your hostnames here - darwin-rebuild will automatically use the correct one
     # You can check your hostname with: hostname
     hostnames = [
-      "macbook-pro-3"  # Current hostname: scutil --get HostName
-      # Add more hostnames here as needed, e.g.:
-      # "My-MacBook-Air"
-      # "Work-MacBook"
+      "macbook-pro-3"
+      "jkm-macbook-pro-4"
+      # Current hostname: scutil --get HostName
+      # Add more hostnames here as needed
     ];
 
     # Username configuration
