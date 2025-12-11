@@ -197,7 +197,7 @@ in {
       "iterm2"
       "notion"
       "transmission"
-      "qbittorrent"
+      # "qbittorrent"
       "docker-desktop"
       "podman-desktop"
       "karabiner-elements"

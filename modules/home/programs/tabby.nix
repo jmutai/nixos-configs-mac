@@ -41,7 +41,7 @@ terminal:
       - ${strip c.teal}
       - ${strip c.subtext0}
   font: "JetBrainsMono Nerd Font"
-  fontSize: 13
+  fontSize: 14
   backgroundOpacity: 0.92
   ligatures: true
   cursorBlink: true
