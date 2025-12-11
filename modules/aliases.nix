@@ -115,6 +115,7 @@
   gcat    = "gcloud auth application-default print-access-token";
   gcgp    = "gcloud config get-value project";
   gcsp    = "gcloud config set project";
+  gcil    = "gcloud compute instances list";
 
 
   # Custom + System
