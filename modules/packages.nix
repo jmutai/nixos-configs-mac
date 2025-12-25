@@ -177,6 +177,7 @@ in {
       "qemu"
       "grpcurl"
       "netbirdio/tap/netbird"
+      "yt-dlp"
     ];
 
     taps = [
