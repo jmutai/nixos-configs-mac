@@ -223,6 +223,7 @@ in {
       "tigervnc-viewer"
       "balenaetcher"
       "netbirdio/tap/netbird-ui"
+      "mark-text"
     ];
 
     onActivation.cleanup = "zap";
