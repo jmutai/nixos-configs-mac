@@ -16,13 +16,12 @@ in {
     nerd-fonts.hack
   ];
 
-  environment.systemPackages =
-    (with pkgs; [
+  environment.systemPackages = (with pkgs; [
     # Communication
     slack
     zoom-us
     discord
-    teams
+    # teams
 
     # Shell, Terminals
     nushell
@@ -58,7 +57,7 @@ in {
 
     # Essential CLI tools
     htop
-    btop # Modern alternative to htop
+    btop   # Modern alternative to top
     bottom # Modern alternative to htop
     zellij
     neofetch
@@ -73,6 +72,7 @@ in {
     tmux
     iproute2mac
     fd
+
     # File management
     ranger
 
@@ -92,20 +92,23 @@ in {
     meson
     act
     lua
-    nixpkgs-fmt  # Nix formatter for Nix IDE extension
+    nixpkgs-fmt
 
-      # Media
-      aria2
-      yt-dlp
-      ffmpeg
-      git-crypt
-      nil
-      nixd
+    # Media
+    aria2
+    yt-dlp
+    ffmpeg
+    git-crypt
+    nil
+    nixd
 
-      # Virtualization
-      vagrant
-      packer
-    ]);
+    # Virtualization
+    vagrant
+    packer
+
+    # VPN
+    openvpn
+  ]);
 
   home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
     # CLI helpers
@@ -113,7 +116,6 @@ in {
     zsh-completions
 
     # Productivity
-    #google-antigravity
 
     # Containerization
     kubectl
@@ -224,6 +226,7 @@ in {
       "balenaetcher"
       "netbirdio/tap/netbird-ui"
       "mark-text"
+      "antigravity"
     ];
 
     onActivation.cleanup = "zap";
