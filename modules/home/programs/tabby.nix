@@ -43,7 +43,7 @@ terminal:
   font: "JetBrainsMono Nerd Font"
   fontSize: 14
   backgroundOpacity: 0.92
-  ligatures: true
+  ligatures: false
   cursorBlink: true
   cursorWidth: 2
   linePadding: 0
