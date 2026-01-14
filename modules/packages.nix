@@ -180,6 +180,7 @@ in {
       "grpcurl"
       "netbirdio/tap/netbird"
       "yt-dlp"
+      "maven"
     ];
 
     taps = [
