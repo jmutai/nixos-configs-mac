@@ -35,6 +35,9 @@ let
     # Docker & Containers
     "ms-azuretools.vscode-docker"
 
+    # Java
+    "vscjava.vscode-gradle"
+
     # Markdown
     "yzhang.markdown-all-in-one"
 

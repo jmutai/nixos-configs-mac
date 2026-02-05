@@ -134,7 +134,7 @@ in {
     tfsec
     terrascan
     hcledit
-    pre-commit
+    # pre-commit  # Temporarily disabled due to Swift build issues with clang 21.1.8
     trivy
     graphviz
     tfupdate
