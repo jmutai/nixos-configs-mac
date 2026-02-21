@@ -181,6 +181,7 @@ in {
       "netbirdio/tap/netbird"
       "yt-dlp"
       "maven"
+      "openjdk"
     ];
 
     taps = [
@@ -201,7 +202,6 @@ in {
       "iterm2"
       "notion"
       "transmission"
-      # "qbittorrent"
       "docker-desktop"
       "podman-desktop"
       "karabiner-elements"
@@ -228,6 +228,9 @@ in {
       "netbirdio/tap/netbird-ui"
       "mark-text"
       "antigravity"
+      "claude-code"
+      "openclaw"
+      # "dia"
     ];
 
     onActivation.cleanup = "zap";
