@@ -223,13 +223,13 @@ in {
       "spotify"
       "keepassxc"
       "vnc-viewer"
-      "tigervnc-viewer"
+      "tigervnc"
       "balenaetcher"
       "netbirdio/tap/netbird-ui"
       "mark-text"
       "antigravity"
       "claude-code"
-      "openclaw"
+      # "openclaw"
       # "dia"
     ];
 
