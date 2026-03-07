@@ -33,7 +33,7 @@ let
     "usernamehw.errorlens"
     # "streetsidesoftware.code-spell-checker"  # Removed - unknown word warnings
     # "ms-vscode.vscode-json"  # Built-in, no need to install
-    "redhat.vscode-yaml"
+    # "redhat.vscode-yaml"
     "ms-vscode.hexeditor"
 
     # Docker & Containers
