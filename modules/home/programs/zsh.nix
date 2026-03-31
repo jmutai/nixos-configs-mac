@@ -73,7 +73,7 @@
 
       # Krew (kubectl plugin manager)
       # First run: setup_krew && install_krew_plugins functions
-      export PATH="''${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+      export PATH="''${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$PATH"
 
       # fzf configuration
       export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'

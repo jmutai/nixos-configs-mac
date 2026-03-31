@@ -141,7 +141,8 @@
   # Quick navigation
   nix-configs = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs/projects/nixos-configs-mac";
   c4geeks = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs/projects/c4geeks";
-  clu     = "npm install -g @anthropic-ai/claude-code@latest";
+  clu     = "curl -fsSL https://claude.ai/install.sh | bash";
   clv     = "claude -version";
+  cl      = "claude --enable-auto-mode";
 }
 
