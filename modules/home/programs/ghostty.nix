@@ -3,44 +3,48 @@
   c = theme.colors;
   strip = theme.rawHexValue;
 in {
-  # Ghostty isn't packaged for macOS in nixpkgs yet; just manage the config file.
   xdg.configFile."ghostty/config".text = ''
-    # Basic behavior
-    shell-integration = detect
-    scrollback-limit = 100000
-    window-inherit-working-directory = true
+    # Shell
     command = /run/current-system/sw/bin/zsh
+    shell-integration = zsh
+    shell-integration-features = cursor,sudo,title
 
-    # Font Settings - Nerd Fonts for CLI
-    font-family = "JetBrainsMono Nerd Font", "FiraCode Nerd Font", "MesloLGS Nerd Font", "Hack Nerd Font", "SF Mono", Monaco, monospace
-    font-size = 12
+    # Font — matching Tabby's setup
+    font-family = JetBrainsMono Nerd Font
+    font-size = 14
     font-thicken = true
-    font-feature = -calt,-liga,-dlig
-    adjust-cell-height = 50%
-    adjust-underline-thickness = 50%
-    adjust-underline-position = 0
+    adjust-cell-height = 15%
 
-    # Window Appearance
+    # Window
     window-padding-x = 12
     window-padding-y = 8
-
-    # Cursor Settings
-    cursor-style = block
-
-    # macOS specific
+    window-save-state = always
+    window-inherit-working-directory = true
+    confirm-close-surface = false
+    macos-titlebar-style = tabs
     macos-option-as-alt = true
-    macos-icon = holographic
-    macos-titlebar-style = hidden
+    macos-window-shadow = true
 
-    # Colors (Edo theme)
-    foreground = ${strip c.text}
+    # Cursor
+    cursor-style = block
+    cursor-style-blink = true
+
+    # Scrollback
+    scrollback-limit = 50000
+
+    # Mouse
+    copy-on-select = clipboard
+    mouse-scroll-multiplier = 2
+
+    # Edo theme colors — matching Tabby
     background = ${strip c.base}
-    selection-foreground = ${strip c.text}
-    selection-background = ${strip c.surface2}
+    foreground = ${strip c.text}
     cursor-color = ${strip c.rosewater}
     cursor-text = ${strip c.crust}
+    selection-background = ${strip c.surface2}
+    selection-foreground = ${strip c.text}
 
-    # ANSI Color Palette
+    # Normal colors
     palette = 0=${strip c.surface1}
     palette = 1=${strip c.red}
     palette = 2=${strip c.green}
@@ -49,6 +53,8 @@ in {
     palette = 5=${strip c.pink}
     palette = 6=${strip c.teal}
     palette = 7=${strip c.subtext1}
+
+    # Bright colors
     palette = 8=${strip c.surface2}
     palette = 9=${strip c.red}
     palette = 10=${strip c.green}
@@ -58,16 +64,21 @@ in {
     palette = 14=${strip c.teal}
     palette = 15=${strip c.subtext0}
 
-    # Transparency & Visual Effects
+    # Visual effects
     background-opacity = 0.92
-    background-blur-radius = 30
-    alpha-blending = native
-    window-colorspace = display-p3
+    background-blur-radius = 20
+    minimum-contrast = 1.1
 
-    # Window Title
-    window-title-font-family = "JetBrainsMono Nerd Font", "SF Mono", Monaco
-
-    # Input & Keyboard
-    copy-on-select = true
+    # Keybindings
+    keybind = cmd+d=new_split:right
+    keybind = cmd+shift+d=new_split:down
+    keybind = cmd+shift+enter=toggle_split_zoom
+    keybind = cmd+opt+left=goto_split:left
+    keybind = cmd+opt+right=goto_split:right
+    keybind = cmd+opt+up=goto_split:top
+    keybind = cmd+opt+down=goto_split:bottom
+    keybind = cmd+shift+equal=equalize_splits
+    keybind = cmd+k=clear_screen
+    keybind = cmd+enter=toggle_fullscreen
   '';
 }

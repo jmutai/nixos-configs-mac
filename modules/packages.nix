@@ -182,6 +182,7 @@ in {
       "yt-dlp"
       "maven"
       "openjdk"
+      "anomalyco/tap/opencode"
     ];
 
     taps = [
@@ -190,6 +191,7 @@ in {
       "keith/formulae"
       "mmazzarolo/formulae"
       "supabase/tap"
+      "anomalyco/tap"
     ];
 
     casks = [
@@ -228,7 +230,8 @@ in {
       "netbirdio/tap/netbird-ui"
       "mark-text"
       "antigravity"
-      "claude-code"
+      #"claude-code" # installed via npm: npm install -g @anthropic-ai/claude-code
+      # "codex"  # installed via npm: @openai/codex
       # "openclaw"
       # "dia"
     ];

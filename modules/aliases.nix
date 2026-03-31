@@ -115,6 +115,8 @@
   gcal    = "gcloud auth login";
   gcaal   = "gcloud auth application-default login";
   gcat    = "gcloud auth application-default print-access-token";
+  gcar    = "gcloud auth revoke";
+  gcaar   = "gcloud auth application-default revoke";
   gcgp    = "gcloud config get-value project";
   gcsp    = "gcloud config set project";
   gcil    = "gcloud compute instances list";
@@ -135,5 +137,11 @@
   # Navigation
   ".." = "cd ..";
   "..." = "cd ../..";
+  
+  # Quick navigation
+  nix-configs = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs/projects/nixos-configs-mac";
+  c4geeks = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs/projects/c4geeks";
+  clu     = "npm install -g @anthropic-ai/claude-code@latest";
+  clv     = "claude -version";
 }
 
