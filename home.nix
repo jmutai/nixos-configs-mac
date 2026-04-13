@@ -10,6 +10,7 @@
     ./modules/home/programs/tmux.nix
     ./modules/home/programs/htop.nix
     ./modules/home/programs/ghostty.nix
+    ./modules/home/programs/cmux.nix
     ./modules/home/programs/kitty.nix
     ./modules/home/programs/iterm2.nix
     ./modules/home/programs/tabby.nix

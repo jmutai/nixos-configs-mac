@@ -192,6 +192,7 @@ in {
       "mmazzarolo/formulae"
       "supabase/tap"
       "anomalyco/tap"
+      "manaflow-ai/cmux"
     ];
 
     casks = [
@@ -229,6 +230,7 @@ in {
       "balenaetcher"
       "netbirdio/tap/netbird-ui"
       "mark-text"
+      "manaflow-ai/cmux/cmux"
       "antigravity"
       #"claude-code" # installed via npm: npm install -g @anthropic-ai/claude-code
       # "codex"  # installed via npm: @openai/codex
