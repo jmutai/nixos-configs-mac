@@ -135,6 +135,7 @@ in {
     terrascan
     hcledit
     # pre-commit  # Temporarily disabled due to Swift build issues with clang 21.1.8
+    gitleaks
     trivy
     graphviz
     tfupdate
@@ -172,6 +173,7 @@ in {
       "nmap"
       "node"
       "pngquant"
+      "oxipng"
       "act"
       "telnet"
       "mise"

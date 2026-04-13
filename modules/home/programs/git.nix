@@ -30,6 +30,7 @@
 
       core = {
         editor = "nvim";
+        hooksPath = "~/.config/git/hooks";
       };
     };
   };
