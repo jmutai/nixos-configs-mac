@@ -20,6 +20,7 @@
 
   # kubectl aliases
   k     = "kubectl";
+  kx    = "kubectx";
   kg    = "kubectl get";
   kn    = "kubectl-ns";
   kns   = "kubectl node-shell";

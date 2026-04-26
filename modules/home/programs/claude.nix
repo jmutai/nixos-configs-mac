@@ -521,6 +521,11 @@ let
     - New files MUST be tracked by git before rebuild (flakes require it)
     - System packages go in `modules/packages.nix`, per-program configs in `modules/home/programs/`
 
+    ## Git commits
+    - Write clear, concise commit messages summarizing changes
+    - NEVER add "Co-Authored-By" lines or any AI/Claude attribution to commits
+    - Only my name (jmutai) should appear in git history — no AI contributor traces anywhere
+
     ## Safety rules
     - Never commit `.env`, credentials, or secrets files
     - Never `git push --force` to main/master without asking
@@ -531,8 +536,18 @@ let
   '';
 in
 {
-  home.file.".claude/settings.json".source =
-    jsonFormat.generate "settings.json" claudeSettings;
+  # settings.json must be a real file (not symlink) so Claude Code and plugins can write to it.
+  # On each activation, seed it from nix config only if the file is missing or is still a symlink.
+  home.activation.claudeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    settings_path="$HOME/.claude/settings.json"
+    nix_settings="${jsonFormat.generate "settings.json" claudeSettings}"
+    mkdir -p "$HOME/.claude"
+    if [ -L "$settings_path" ] || [ ! -f "$settings_path" ]; then
+      rm -f "$settings_path"
+      cp "$nix_settings" "$settings_path"
+      chmod 644 "$settings_path"
+    fi
+  '';
 
   home.file.".claude/skills/vm/SKILL.md".text = vmSkill;
   home.file.".claude/CLAUDE.md".text = globalClaudeMd;
