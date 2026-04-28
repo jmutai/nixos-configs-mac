@@ -15,8 +15,10 @@
   gcm = "git commit -m";
   gp  = "git push";
   gl  = "git pull";
+  gpl = "git pull";
   gpf = "git push --force-with-lease origin";
   greset = "git reset --hard origin/main";
+  gdb = "git branch | grep -v '^\\* ' | grep -v '^  main$' | xargs -r git branch -D";
 
   # kubectl aliases
   k     = "kubectl";
