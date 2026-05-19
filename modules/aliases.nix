@@ -65,6 +65,7 @@
 
   # Utilities
   h     = "htop";
+  awake = "caffeinate -di";
 
   # Terraform/OpenTofu shortcuts
   tf    = "tofu";

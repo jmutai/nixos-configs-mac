@@ -164,6 +164,7 @@ in {
     enable = true;
 
     brews = [
+      "argocd"
       "xz"
       "zlib"
       "gnupg"
