@@ -17,6 +17,7 @@
   gl  = "git pull";
   gpl = "git pull";
   gpf = "git push --force-with-lease origin";
+  push = "git push -u origin main";
   greset = "git reset --hard origin/main";
   gdb = "git branch | grep -v '^\\* ' | grep -v '^  main$' | xargs -r git branch -D";
 
@@ -144,7 +145,7 @@
   
   # Quick navigation
   nix-configs = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs/projects/nixos-configs-mac";
-  c4geeks = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs/projects/c4geeks";
+  c4geeks = "cd ~/.cheats/c4geeks";
   clu     = "curl -fsSL https://claude.ai/install.sh | bash";
   clv     = "claude -version";
   cl      = "claude --enable-auto-mode";

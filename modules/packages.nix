@@ -140,6 +140,10 @@ in {
     graphviz
     tfupdate
 
+    # Secrets management
+    sops
+    age
+
 
     # Container tools
     podman

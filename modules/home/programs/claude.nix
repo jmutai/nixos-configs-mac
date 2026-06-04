@@ -382,7 +382,7 @@ let
     ### Access
     - **pve01**: 192.168.1.3 (SSH as root, key: ~/.ssh/id_ed25519)
     - **pve02**: 192.168.1.4 (SSH as root, key: ~/.ssh/id_ed25519)
-    - **Storage**: `local` (ISOs), `local-lvm` (VM disks), `zfs-pool` (larger VMs)
+    - **Storage**: `zfs-pool` is the DEFAULT for all VM disks (both nodes, ~950 GB, thin-provisioned). All templates live on `zfs-pool`, so a bare `qm clone` (no `--storage`) lands there automatically. `local` holds ISOs. `local-lvm` is legacy: existing VMs stay on it, never target it for new VMs. `zfs-pool` is node-local (not shared), so cross-node migration of an offline VM needs `--with-local-disks --targetstorage zfs-pool`.
     - **VMID range**: 110+ only (lower IDs are production)
 
     ### Pre-flight: check node load before creating
@@ -395,7 +395,7 @@ let
     **Rocky Linux 10** — VMID 799 on pve02:
     ```bash
     # Clone on pve02 (fast)
-    ssh root@192.168.1.4 "qm clone 799 <VMID> --name <name> --full true --storage local-lvm"
+    ssh root@192.168.1.4 "qm clone 799 <VMID> --name <name> --full true --storage zfs-pool"
     ssh root@192.168.1.4 "qm set <VMID> --memory 4096 --cores 2 --ipconfig0 'ip=<IP>/24,gw=192.168.1.1' --nameserver 8.8.8.8"
     ssh root@192.168.1.4 "qm start <VMID>"
     ```
@@ -403,15 +403,15 @@ let
 
     To place on pve01 instead (clone on pve02, then migrate):
     ```bash
-    ssh root@192.168.1.4 "qm clone 799 <VMID> --name <name> --full true --storage local-lvm"
-    ssh root@192.168.1.4 "qm migrate <VMID> pve01"
+    ssh root@192.168.1.4 "qm clone 799 <VMID> --name <name> --full true --storage zfs-pool"
+    ssh root@192.168.1.4 "qm migrate <VMID> pve01 --with-local-disks --targetstorage zfs-pool"
     ssh root@192.168.1.3 "qm set <VMID> --memory 4096 --cores 2 --ipconfig0 'ip=<IP>/24,gw=192.168.1.1' --nameserver 8.8.8.8"
     ssh root@192.168.1.3 "qm start <VMID>"
     ```
 
     **Fedora 42** — VMID 800 on pve01:
     ```bash
-    ssh root@192.168.1.3 "qm clone 800 <VMID> --name <name> --full true --storage local-lvm"
+    ssh root@192.168.1.3 "qm clone 800 <VMID> --name <name> --full true --storage zfs-pool"
     ssh root@192.168.1.3 "qm set <VMID> --memory 4096 --cores 2 --ipconfig0 'ip=dhcp' --nameserver 8.8.8.8"
     ssh root@192.168.1.3 "qm resize <VMID> virtio0 30G"
     ssh root@192.168.1.3 "qm start <VMID>"
@@ -425,9 +425,9 @@ let
     ssh root@192.168.1.4 "ls /var/lib/vz/template/iso/"
 
     qm create <VMID> --name <name> --memory 8192 --cores 4 \
-      --bios ovmf --efidisk0 local-lvm:1,efitype=4m,pre-enrolled-keys=0 \
+      --bios ovmf --efidisk0 zfs-pool:1,efitype=4m,pre-enrolled-keys=0 \
       --machine q35 --scsihw virtio-scsi-single \
-      --scsi0 local-lvm:60,iothread=1,discard=on \
+      --scsi0 zfs-pool:60,iothread=1,discard=on \
       --ide2 local:iso/<iso>,media=cdrom --boot order='ide2;scsi0' \
       --net0 virtio,bridge=vmbr0 --vga virtio,memory=64 --ostype l26 --agent 1 --tablet 1
     ```

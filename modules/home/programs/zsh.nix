@@ -94,6 +94,41 @@
         source ~/.cheats/functions.sh
       fi
 
+      # age encrypt/decrypt using an SSH key (default ~/.ssh/id_rsa; override with $AGE_KEY)
+      # encrypt: pubkey (id_rsa.pub) as recipient | decrypt: private key (id_rsa) as identity
+      age-enc() {
+        # usage: age-enc <file> [out]   (default out: <file>.age)
+        local key="''${AGE_KEY:-$HOME/.ssh/id_rsa}"
+        [[ -n "$1" ]] || { print -u2 "usage: age-enc <file> [out.age]"; return 1; }
+        local out="''${2:-$1.age}"
+        age -R "$key.pub" -o "$out" "$1" && print "encrypted -> $out"
+      }
+      age-dec() {
+        # usage: age-dec <file.age> [out]   (no out = print to stdout)
+        local key="''${AGE_KEY:-$HOME/.ssh/id_rsa}"
+        [[ -n "$1" ]] || { print -u2 "usage: age-dec <file.age> [out]"; return 1; }
+        if [[ -n "$2" ]]; then
+          age -d -i "$key" -o "$2" "$1" && print "decrypted -> $2"
+        else
+          age -d -i "$key" "$1"
+        fi
+      }
+      age-edit() {
+        # usage: age-edit <file.age>   decrypt -> $EDITOR -> re-encrypt, plaintext never hits cwd
+        local key="''${AGE_KEY:-$HOME/.ssh/id_rsa}"
+        [[ -n "$1" ]] || { print -u2 "usage: age-edit <file.age>"; return 1; }
+        [[ -f "$1" ]] || { print -u2 "age-edit: $1 not found"; return 1; }
+        local tmp; tmp="$(mktemp "''${TMPDIR:-/tmp}/age-edit.XXXXXX")" || return 1
+        chmod 600 "$tmp"
+        if ! age -d -i "$key" -o "$tmp" "$1"; then
+          rm -f "$tmp"; print -u2 "age-edit: decrypt failed"; return 1
+        fi
+        "''${EDITOR:-nvim}" "$tmp" \
+          && age -R "$key.pub" -o "$1" "$tmp" \
+          && print "re-encrypted -> $1"
+        rm -f "$tmp"
+      }
+
       # Completion styling
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       zstyle ':completion:*' menu select
