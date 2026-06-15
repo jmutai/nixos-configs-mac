@@ -82,6 +82,8 @@ in {
     # languages and runtimes
     python3
     go
+    php
+    phpPackages.composer
     pipx
     uv
     yarn
@@ -110,7 +112,8 @@ in {
     openvpn
   ]);
 
-  home-manager.users.${config.system.primaryUser}.home.packages = with pkgs; [
+  home-manager.users.${config.system.primaryUser} = {
+  home.packages = with pkgs; [
     # CLI helpers
     nnn
     zsh-completions
@@ -164,6 +167,29 @@ in {
     tailscale  # Tailscale CLI
   ];
 
+  # Global CLIs that are NOT in nixpkgs: uv-managed tools + npm globals.
+  # Installed declaratively on every `darwin-rebuild switch` so a fresh machine
+  # is reproducible from one `update`. Idempotent (uv/npm skip already-installed);
+  # errors are swallowed so a network blip never fails the rebuild.
+  # Literal DAG attrset == lib.hm.dag.entryAfter ["installPackages"] (no lib.hm needed here).
+  home.activation.cliTools = {
+    after = [ "installPackages" ];
+    before = [ ];
+    data = ''
+      # uv tools (isolated venvs under ~/.local/share/uv/tools)
+      for t in mlx-whisper vastai vncdotool ssh-audit aider-chat kimi-cli; do
+        ${pkgs.uv}/bin/uv tool install --quiet "$t" || true
+      done
+      # npm globals (node is Homebrew-managed; its global prefix is /opt/homebrew)
+      if [ -x /opt/homebrew/bin/npm ]; then
+        for n in @google/gemini-cli @openai/codex wrangler @salesforce/cli; do
+          /opt/homebrew/bin/npm install -g --silent "$n" || true
+        done
+      fi
+    '';
+  };
+  };
+
   homebrew = {
     enable = true;
 
@@ -190,6 +216,7 @@ in {
       "maven"
       "openjdk"
       "anomalyco/tap/opencode"
+      "poppler"   # pdftoppm/pdfinfo/pdftotext — PDF tooling (was an untracked leaf; zap would remove it)
     ];
 
     taps = [
@@ -248,6 +275,8 @@ in {
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
+    # Homebrew >=5.1 requires --force with `brew bundle install --cleanup`
+    onActivation.extraFlags = [ "--force" ];
   };
 
 }
