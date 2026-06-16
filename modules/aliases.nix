@@ -149,5 +149,13 @@
   clu     = "curl -fsSL https://claude.ai/install.sh | bash";
   clv     = "claude -version";
   cl      = "claude --enable-auto-mode";
+
+  # claude-swap (account switching)
+  cs   = "cswap --switch";     # toggle to next account (2-account toggle)
+  cst  = "cswap --switch-to";  # switch to specific: cst 2 / cst user@example.com
+  csl  = "cswap --list";       # list accounts + usage/reset times
+  css  = "cswap --status";     # show active account
+  cstu = "cswap --tui";        # interactive menu
+  csr  = "cswap run";          # session mode: run an account here only, e.g. csr 2
 }
 
