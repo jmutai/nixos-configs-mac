@@ -34,9 +34,11 @@ A declarative macOS system configuration managed with [nix-darwin](https://githu
 - 📝 **Editor Setup**: NixVim (Neovim) and Cursor IDE with auto-installed extensions
 - 🖥️ **Terminal Emulators**: Fully configured Kitty, Ghostty, and Tabby with Edo theme
 - 🎨 **Theme System**: Custom Edo color theme with semantic colors
-- 🔐 **Security**: Touch ID for sudo, system hardening options
+- 🔐 **Security**: Touch ID for sudo, SSH commit signing, gitleaks secret scanning (pre-commit hook + CI workflow)
 - ⚡ **Optimizations**: Fast key repeat, dock animations, and system tweaks
 - ⏰ **Menu Bar Apps**: Clock-rs with 24-hour time display
+- 🤖 **Agent Tooling**: Claude Code, cmux, and Antigravity configured declaratively
+- 📚 **Cheatsheets**: `cheat` configured against a personal `~/.cheats` sheet store
 
 ## Prerequisites
 
@@ -163,21 +165,22 @@ username = "jkmutai";  # Change to your macOS username
 The configuration will automatically use this username throughout the setup.
 
 **Update Git Configuration:**
-Edit `home.nix` and update the git user settings:
+Edit `modules/home/programs/git.nix` and update the git user settings:
 
 ```nix
-programs.git = {
-  settings = {
-    user = {
-      name = "";  # Change to your git username
-      email = "";  # Change to your git email
-    };
-    # ... rest of config
+programs.git.settings = {
+  user = {
+    name = "";          # Change to your git username
+    email = "";         # Change to your git email
+    signingkey = "~/.ssh/id_rsa.pub";  # SSH key used for commit signing
   };
+  # ... rest of config
 };
 ```
 
-This will configure your git identity globally for all repositories.
+This configures your git identity globally for all repositories. Commit/tag
+signing uses SSH (`gpg.format = "ssh"`); point `signingkey` at your own public
+key, or set `commit.gpgsign = false` to disable signing.
 
 ### Step 6: Initial Build
 
@@ -243,13 +246,18 @@ All user programs are configured in `modules/home/programs/`:
 - `kitty.nix`: Kitty terminal configuration
 - `ghostty.nix`: Ghostty terminal configuration
 - `tabby.nix`: Tabby terminal configuration
-- `git.nix`: Git configuration
+- `iterm2.nix`: iTerm2 dynamic profile (Edo theme)
+- `git.nix`: Git configuration (SSH commit signing, aliases)
 - `bat.nix`: Bat (cat replacement) configuration
 - `fzf.nix`: Fuzzy finder configuration
 - `tmux.nix`: Tmux configuration
 - `starship.nix`: Starship prompt configuration
 - `clock-rs.nix`: Clock-rs menu bar app
-- `antigravity.nix`: Antigravity configuration
+- `antigravity.nix`: Antigravity (Google) configuration
+- `cmux.nix`: cmux agent terminal settings
+- `claude.nix`: Claude Code settings and permissions
+- `python.nix`: Python toolchain / packages
+- `cheat.nix`: cheat cheatsheet tool (points at `~/.cheats/sheets`)
 - `htop.nix`: Htop configuration
 - `theme.nix`: Edo color theme definition
 
@@ -370,7 +378,7 @@ sudo darwin-rebuild switch --flake .
 
 ### Useful Aliases
 
-See `home.nix` for a complete list, but here are some highlights:
+See `modules/aliases.nix` for a complete list, but here are some highlights:
 
 **Git:**
 
@@ -415,7 +423,8 @@ environment.systemPackages = with pkgs; [
 ```
 
 **User packages** (specific to your user):
-Edit `home.nix` and add to `home.packages`:
+Edit `modules/packages.nix` and add to `home.packages` (under the
+`home-manager.users.<username>` block):
 
 ```nix
 home.packages = with pkgs; [
@@ -425,7 +434,7 @@ home.packages = with pkgs; [
 ```
 
 **Homebrew Casks** (GUI applications):
-Edit `modules/homebrew.nix` and add to `homebrew.casks`:
+Edit `modules/packages.nix` and add to `homebrew.casks`:
 
 ```nix
 homebrew = {
@@ -435,6 +444,11 @@ homebrew = {
   ];
 };
 ```
+
+> **Note:** `onActivation.cleanup = "zap"` means any Homebrew cask/brew *not*
+> listed here will be uninstalled on the next rebuild. Add it to the list to
+> keep it. Non-official taps must be listed under `homebrew.taps` so the
+> trust store (`~/.homebrew/trust.json`) is seeded automatically.
 
 After making changes, rebuild:
 
@@ -456,7 +470,7 @@ Edit `modules/home/programs/zsh.nix` for shell configuration:
 
 ### Changing Git Configuration
 
-Edit `home.nix` under `programs.git.settings.user`:
+Edit `modules/home/programs/git.nix` under `programs.git.settings.user`:
 
 - **Name**: Change `user.name` to your git username
 - **Email**: Change `user.email` to your git email
@@ -502,14 +516,21 @@ Edit `modules/system-settings.nix`:
 nixos-configs-mac/
 ├── flake.nix                    # Main flake configuration with inputs and outputs
 ├── flake.lock                   # Locked dependencies (auto-generated)
-├── home.nix                     # User configuration: imports all program modules
+├── home.nix                     # User config: imports program modules + gitleaks hook
 ├── nixvim.nix                   # Neovim configuration: plugins, themes, LSP
+├── CLAUDE.md                    # Project guidance for Claude Code
+├── .github/workflows/
+│   └── secret-scan.yml             # CI gitleaks secret scanning
+├── .claude/skills/
+│   └── nix-manage.md               # Claude Code skill for managing this config
 ├── modules/                     # Modular configuration files
-│   ├── packages.nix                # System packages (Nix) and Homebrew
+│   ├── packages.nix                # System pkgs, user pkgs, Homebrew (brews/casks/taps)
 │   ├── system-settings.nix         # macOS system settings and preferences
 │   ├── nix-core.nix                # Nix configuration settings
 │   ├── keyboard-remap.nix          # Keyboard remapping configuration
 │   ├── aliases.nix                 # Shell aliases (git, kubectl, docker, etc.)
+│   ├── icons/                      # Custom app icons (e.g. kitty.icns)
+│   ├── utils/                      # Nix helper functions (colors-mix.nix)
 │   └── home/                      # Home Manager program configurations
 │       ├── theme.nix                  # Edo color theme definition
 │       └── programs/                 # Individual program configurations
@@ -518,13 +539,18 @@ nixos-configs-mac/
 │           ├── kitty.nix               # Kitty terminal
 │           ├── ghostty.nix             # Ghostty terminal
 │           ├── tabby.nix               # Tabby terminal
-│           ├── git.nix                # Git configuration
+│           ├── iterm2.nix             # iTerm2 dynamic profile
+│           ├── git.nix                # Git config (SSH signing, aliases)
 │           ├── bat.nix                # Bat configuration
 │           ├── fzf.nix                # Fuzzy finder
 │           ├── tmux.nix               # Tmux
 │           ├── starship.nix          # Starship prompt
 │           ├── clock-rs.nix          # Clock-rs menu bar app
-│           ├── antigravity.nix        # Antigravity
+│           ├── antigravity.nix        # Antigravity (Google)
+│           ├── cmux.nix              # cmux agent terminal
+│           ├── claude.nix            # Claude Code settings/permissions
+│           ├── python.nix            # Python toolchain
+│           ├── cheat.nix             # cheat cheatsheets
 │           └── htop.nix               # Htop
 └── README.md                    # This file
 ```
