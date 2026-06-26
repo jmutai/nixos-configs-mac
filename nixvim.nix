@@ -5,8 +5,7 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    
-    # Basic options
+
     opts = {
       number = true;
       relativenumber = false;
@@ -22,12 +21,10 @@
       #selectmode = "mouse,key";
       #mousemodel = "popup";
     };
-    
-    # Color scheme
+
     #colorschemes.tokyonight.enable = true;
     colorschemes.catppuccin.enable = true;
-    
-    # Plugins
+
     plugins = {
       lualine.enable = true;
       nvim-tree.enable = true;

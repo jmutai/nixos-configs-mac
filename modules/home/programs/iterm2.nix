@@ -3,7 +3,6 @@
   c = theme.colors;
 in {
   # iTerm2 Dynamic Profile - automatically loaded from DynamicProfiles directory
-  # The Edo theme profile will appear in iTerm2 > Preferences > Profiles
   home.file."Library/Application Support/iTerm2/DynamicProfiles/edo-profile.json".text = builtins.toJSON {
     Profiles = [
       {

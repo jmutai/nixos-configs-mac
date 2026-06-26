@@ -1,13 +1,10 @@
 {
-  # Security settings
   # Enable touch ID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  # System settings and optimizations
   system = {
     defaults = {
-      menuExtraClock.Show24Hour = true; # show 24 hour clock
-      # Dock settings
+      menuExtraClock.Show24Hour = true;
       dock = {
         autohide = true;
         autohide-delay = 0.0;
@@ -21,7 +18,6 @@
         mru-spaces = false;  # Don't rearrange spaces
       };
 
-      # Finder settings
       finder = {
         AppleShowAllExtensions = true;
         AppleShowAllFiles = false;
@@ -32,7 +28,6 @@
         _FXShowPosixPathInTitle = true;
       };
 
-      # Login window settings
       loginwindow = {
         autoLoginUser = null;
         GuestEnabled = false;
@@ -40,32 +35,28 @@
         LoginwindowText = "Welcome to macOS";
       };
 
-      # Global macOS settings
       NSGlobalDomain = {
-        "com.apple.swipescrolldirection" = true; # enable natural scrolling(default to true)
-        "com.apple.sound.beep.feedback" = 0;     # disable beep sound when pressing volume up/down key
+        "com.apple.swipescrolldirection" = true; # natural scrolling
+        "com.apple.sound.beep.feedback" = 0;     # disable beep on volume keys
         "com.apple.keyboard.fnState" = false;    # Use media keys by default
-        AppleInterfaceStyle = "Dark";            # dark mode
+        AppleInterfaceStyle = "Dark";
 
-        # Keyboard settings
         ApplePressAndHoldEnabled = false;        # Enable key repeat
-        InitialKeyRepeat = 15;                   # Fast key repeat
-        KeyRepeat = 2;                           # Very fast key repeat
-        
-        # Interface settings
+        InitialKeyRepeat = 15;
+        KeyRepeat = 2;
+
         AppleShowAllExtensions = true;
         AppleShowAllFiles = false;
-        
+
         # Disable automatic features
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticPeriodSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
-        
-        # Window animations
+
         NSWindowResizeTime = 0.001;
-        
+
         # Expand save and print panels by default
         NSNavPanelExpandedStateForSaveMode = true;
         NSNavPanelExpandedStateForSaveMode2 = true;
@@ -73,37 +64,33 @@
         PMPrintingExpandedStateForPrint2 = true;
       };
 
-      # Trackpad settings
       trackpad = {
         Clicking = true;  # Tap to click
         TrackpadThreeFingerDrag = true;
       };
 
-      # Screen saver settings
       screensaver = {
         askForPassword = true;
         askForPasswordDelay = 0;
       };
 
-      # Screenshot settings
       screencapture = {
         location = "~/Pictures/Screenshots";
         type = "png";
         disable-shadow = true;
       };
 
-      # Custom user preferences
       CustomUserPreferences = {
-        # Disable annoying features
+        # Disable Apple personalized advertising
         "com.apple.AdLib" = {
           allowApplePersonalizedAdvertising = false;
         };
-        
+
         # Speed up Mission Control animations
         "com.apple.dock" = {
           expose-animation-duration = 0.1;
         };
-        
+
         # 24-hour clock in menu bar
         "com.apple.menuextra.clock" = {
           Show24Hour = true;
@@ -118,13 +105,11 @@
       };
     };
 
-    # Keyboard settings
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToControl = true;  # Remap Caps Lock to Control
+      remapCapsLockToControl = true;
     };
 
-    # Set macOS version
     stateVersion = 6;
 
   };

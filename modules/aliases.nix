@@ -65,8 +65,9 @@
   kgxpv = "kubectl get pkgrev";
 
   # Utilities
-  h     = "htop";
-  awake = "caffeinate -di";
+  h      = "htop";
+  awake  = "caffeinate -di";
+  sshadd = "ssh-add --apple-use-keychain ~/.ssh/id_rsa";
 
   # Terraform/OpenTofu shortcuts
   tf    = "tofu";

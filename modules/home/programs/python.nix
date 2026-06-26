@@ -19,12 +19,8 @@
   #   - Create virtual environments per project
 
   home.packages = with pkgs; [
-    # Create a Python environment with packages from nixpkgs
-    # Uncomment and add packages that are available in nixpkgs
     (python3.withPackages (ps: with ps; [
       # pip  # Uncomment to include pip for manual installations
-      # Add Python packages from nixpkgs here:
-      # reportlab  # If available: nix search nixpkgs python3Packages.reportlab
       reportlab
       numpy
       pandas

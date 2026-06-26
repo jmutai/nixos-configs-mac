@@ -1,25 +1,16 @@
 let
-  # ============================================================================
-  # Utility Functions
-  # ============================================================================
-
   # Strip the # from hex colors (for terminals that don't need the #)
   rawHexValue = color: builtins.substring 1 6 color;
 
-  # Convert hex to RGB tuple (for some applications)
   hexToRgb = color: {
     r = builtins.substring 0 2 (rawHexValue color);
     g = builtins.substring 2 2 (rawHexValue color);
     b = builtins.substring 4 2 (rawHexValue color);
   };
 
-  # ============================================================================
   # Edo Color Palette
-  # A beautiful, carefully crafted dark theme with excellent contrast
-  # ============================================================================
-
   colors = {
-    # Accent Colors - Vibrant and expressive
+    # Accent Colors
     rosewater = "#C97D6E";  # Warm pink-red, great for highlights
     flamingo = "#C98A7D";  # Softer pink
     pink = "#BC76C1";       # Vibrant magenta
@@ -52,11 +43,7 @@ let
     crust = "#000000";      # Darkest background (borders, dividers)
   };
 
-  # ============================================================================
   # Semantic Color Mappings
-  # Use these for consistent meaning across applications
-  # ============================================================================
-
   semantic = {
     # Status Colors
     success = colors.green;
@@ -81,11 +68,7 @@ let
     hover = colors.surface1;      # Hover state
   };
 
-  # ============================================================================
   # Git/Delta Diff Colors
-  # Optimized for code review and git diffs
-  # ============================================================================
-
   diff = {
     hunkHeader = "#23273D";
     minusEmph = "#53394c";        # Deleted lines (emphasized)
@@ -98,11 +81,7 @@ let
     yellow = "#544f4e";           # Highlighted changes
   };
 
-  # ============================================================================
   # Editor UI Colors
-  # For code editors and IDEs
-  # ============================================================================
-
   ui = {
     findHighlight = "#3e5767";           # Search highlight
     lineNumber = colors.subtext0;         # Line numbers
@@ -114,11 +93,7 @@ let
     wordHighlightStrong = colors.surface2; # Strong word highlight
   };
 
-  # ============================================================================
   # Terminal-Specific Color Mappings
-  # Optimized for terminal emulators
-  # ============================================================================
-
   terminal = {
     # Standard ANSI colors (0-15)
     black = colors.surface1;
@@ -147,10 +122,7 @@ let
     selectionText = colors.text;
   };
 
-  # ============================================================================
   # Theme Metadata
-  # ============================================================================
-
   meta = {
     name = "Edo";
     variant = "dark";

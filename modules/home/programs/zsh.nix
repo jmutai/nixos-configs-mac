@@ -50,7 +50,6 @@
     # Shell aliases - imported from modules/aliases.nix
     shellAliases = import ../../aliases.nix;
 
-    # Additional zsh configuration
     initContent = ''
       # Add zsh-completions to fpath FIRST, before anything else
       fpath+=${pkgs.zsh-completions}/share/zsh/site-functions

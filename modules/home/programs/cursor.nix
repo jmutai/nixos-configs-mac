@@ -1,7 +1,6 @@
 { config, lib, ... }:
 
 let
-  # List of extensions to automatically install
   cursorExtensions = [
     # Language Support
     "ms-python.python"
@@ -240,6 +239,14 @@ in
       {
         "key": "cmd+i",
         "command": "composerMode.agent"
+      },
+      // Disable Markdown All in One's Backspace handler.
+      // In VS Code forks the extension's lazy activation does not fire before
+      // the keybinding is invoked, so pressing Backspace in a .md file errors
+      // with "command 'markdown.extension.onBackspaceKey' not found".
+      {
+        "key": "backspace",
+        "command": "-markdown.extension.onBackspaceKey"
       }
     ]
   '';

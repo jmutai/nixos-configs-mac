@@ -3,7 +3,6 @@
   c = theme.colors;
 in {
   # cmux settings — cmux inherits terminal rendering from ghostty config
-  # These are cmux-specific application settings
   xdg.configFile."cmux/settings.json".text = builtins.toJSON {
     # Notifications — key feature for agent workflows
     notifications = {
@@ -27,7 +26,7 @@ in {
 
     # Appearance — complement ghostty/edo theme
     appearance = {
-      tabBarPosition = "left";    # vertical sidebar tabs
+      tabBarPosition = "left";
       showTabBar = true;
     };
   };

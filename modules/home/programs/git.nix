@@ -8,7 +8,13 @@
       user = {
         name = "jmutai";
         email = "josphatkmutai@gmail.com";
+        signingkey = "~/.ssh/id_rsa.pub";
       };
+
+      gpg.format = "ssh";
+
+      commit.gpgsign = true;
+      tag.gpgSign = true;
 
       alias = {
         st = "status";

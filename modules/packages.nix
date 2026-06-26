@@ -1,13 +1,22 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   system = pkgs.stdenv.hostPlatform.system;
+  primaryUser = config.system.primaryUser;
+  # Lowercased tap names == brew's canonical form for its trust store.
+  trustStoreJson = builtins.toJSON {
+    trustedtaps = map (t: lib.toLower t.name) config.homebrew.taps;
+  };
 in {
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-36.9.5"
   ];
+
+  # Silence Homebrew's "Hide these hints with HOMEBREW_NO_ENV_HINTS" nags
+  # (applies to manual brew runs too, not just the rebuild bundle step).
+  environment.variables.HOMEBREW_NO_ENV_HINTS = "1";
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -66,9 +75,9 @@ in {
     curl
     wget
     tree
-    ripgrep  # Fast grep alternative
-    fzf      # Fuzzy finder
-    eza      # Better ls
+    ripgrep
+    fzf
+    eza
     tmux
     iproute2mac
     fd
@@ -117,8 +126,7 @@ in {
     # CLI helpers
     nnn
     zsh-completions
-
-    # Productivity
+    cheat              # cheatsheet tool; configured in programs/cheat.nix
 
     # Containerization
     kubectl
@@ -163,8 +171,8 @@ in {
     mariadb
 
     # VPN clients
-    openvpn    # OpenVPN CLI
-    tailscale  # Tailscale CLI
+    openvpn
+    tailscale
   ];
 
   # Global CLIs that are NOT in nixpkgs: uv-managed tools + npm globals.
@@ -188,7 +196,27 @@ in {
       fi
     '';
   };
+
   };
+
+  # Seed Homebrew's tap-trust store BEFORE `brew bundle` runs. In nix-darwin's
+  # activation order the `homebrew` phase runs before `postActivation` (where
+  # home-manager activates), so home-manager can't own this file. brew also rejects
+  # a symlinked or non-user-owned trust store, and rewrites it during install via
+  # `Trust.trust!` — so it must be a real, user-owned, 0600 regular file, written
+  # here as root then chowned to the user. Derived from homebrew.taps (below) so the
+  # two can't drift; adding a tap automatically trusts it on the next rebuild.
+  # Idempotent — runs every `darwin-rebuild`.
+  system.activationScripts.extraActivation.text = ''
+    printf >&2 'seeding Homebrew tap-trust store...\n'
+    userHome=$(/usr/bin/dscl . -read "/Users/"${lib.escapeShellArg primaryUser} NFSHomeDirectory 2>/dev/null | /usr/bin/awk '{print $NF}')
+    [ -n "$userHome" ] || userHome="/Users/"${lib.escapeShellArg primaryUser}
+    /usr/bin/install -d -o ${lib.escapeShellArg primaryUser} -g staff -m 0755 "$userHome/.homebrew"
+    rm -f "$userHome/.homebrew/trust.json"   # drop any stale home-manager symlink / old file
+    printf '%s\n' ${lib.escapeShellArg trustStoreJson} > "$userHome/.homebrew/trust.json"
+    chown ${lib.escapeShellArg primaryUser}:staff "$userHome/.homebrew/trust.json"
+    chmod 0600 "$userHome/.homebrew/trust.json"
+  '';
 
   homebrew = {
     enable = true;
@@ -219,6 +247,11 @@ in {
       "poppler"   # pdftoppm/pdfinfo/pdftotext — PDF tooling (was an untracked leaf; zap would remove it)
     ];
 
+    # Homebrew 6.0 gates non-official taps behind a trust check. The trust store
+    # (~/.homebrew/trust.json) is written from this list by the extraActivation
+    # script above, before `brew bundle` runs — no manual `brew trust` is ever
+    # needed, fresh machines included. Keep every non-official tap here (incl.
+    # netbirdio/tap for the netbird brew) so it gets trusted.
     taps = [
       "FelixKratz/formulae"
       "mrkai77/cask"
@@ -227,6 +260,7 @@ in {
       "supabase/tap"
       "anomalyco/tap"
       "manaflow-ai/cmux"
+      "netbirdio/tap"
     ];
 
     casks = [
@@ -265,7 +299,8 @@ in {
       "netbirdio/tap/netbird-ui"
       "mark-text"
       "manaflow-ai/cmux/cmux"
-      "antigravity"
+      "antigravity"      # "Google Antigravity" agent orchestration platform -> Antigravity.app
+      "antigravity-ide"  # "Google Antigravity IDE" (separate product) -> Antigravity IDE.app
       #"claude-code" # installed via npm: npm install -g @anthropic-ai/claude-code
       # "codex"  # installed via npm: @openai/codex
       # "openclaw"
@@ -273,7 +308,12 @@ in {
     ];
 
     onActivation.cleanup = "zap";
-    onActivation.autoUpdate = true;
+    # autoUpdate = false keeps `darwin-rebuild` quiet and fast: it sets
+    # HOMEBREW_NO_AUTO_UPDATE=1, so brew skips the "Auto-updating..." step and
+    # the New Formulae/New Casks dumps. `upgrade = true` still upgrades against
+    # the last-fetched formula data. Refresh manually with `brew update` (or the
+    # `upgrade` alias) when you want newer formulae.
+    onActivation.autoUpdate = false;
     onActivation.upgrade = true;
     # Homebrew >=5.1 requires --force with `brew bundle install --cleanup`
     onActivation.extraFlags = [ "--force" ];

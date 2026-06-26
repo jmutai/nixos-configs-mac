@@ -18,10 +18,9 @@
     ./modules/home/programs/antigravity.nix
     ./modules/home/programs/python.nix
     ./modules/home/programs/claude.nix
+    ./modules/home/programs/cheat.nix
   ];
 
-  # Create Screenshots directory for macOS screenshots
-  # Use activation script to ensure directory exists and has correct permissions
   home.activation.createScreenshotsDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/Pictures/Screenshots"
     chmod 755 "$HOME/Pictures/Screenshots" 2>/dev/null || true
@@ -55,6 +54,5 @@
     '';
   };
 
-  # Home Manager needs a bit of information about you and the paths it should manage
   home.stateVersion = "25.05";
 }

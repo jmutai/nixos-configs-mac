@@ -1,7 +1,6 @@
 { config, lib, ... }:
 
 let
-  # List of extensions to automatically install
   antigravityExtensions = [
     # Language Support
     "ms-python.python"
@@ -239,6 +238,14 @@ in
       {
         "key": "cmd+i",
         "command": "composerMode.agent"
+      },
+      // Disable Markdown All in One's Backspace handler.
+      // In VS Code forks the extension's lazy activation does not fire before
+      // the keybinding is invoked, so pressing Backspace in a .md file errors
+      // with "command 'markdown.extension.onBackspaceKey' not found".
+      {
+        "key": "backspace",
+        "command": "-markdown.extension.onBackspaceKey"
       }
     ]
   '';
@@ -348,5 +355,23 @@ in
 
     echo ""
     echo "Antigravity extensions: $INSTALLED_COUNT installed, $SKIPPED_COUNT already present"
+  '';
+
+  # Bootstrap the Antigravity CLI (`agy`) -> ~/.local/bin/agy
+  # `agy` is a self-updating native binary (no nixpkgs package, no pinned hash),
+  # so we bootstrap it via the official installer rather than packaging it.
+  # The installer is idempotent (exits early if agy exists); the binary then
+  # self-updates in the background. ~/.local/bin is already on PATH (zsh.nix).
+  home.activation.installAntigravityCli = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ -x "$HOME/.local/bin/agy" ]; then
+      echo "✓ Antigravity CLI (agy) already installed"
+    else
+      echo "Bootstrapping Antigravity CLI (agy)..."
+      if /usr/bin/curl -fsSL https://antigravity.google/cli/install.sh | /bin/bash; then
+        echo "✓ Antigravity CLI installed to ~/.local/bin/agy"
+      else
+        echo "  ⚠ agy bootstrap failed (offline?). It will retry on next rebuild."
+      fi
+    fi
   '';
 }
