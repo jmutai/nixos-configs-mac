@@ -146,6 +146,7 @@
   
   # Quick navigation
   nix-configs = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs/projects/nixos-configs-mac";
+  cheats  = "cd ~/.cheats";
   c4geeks = "cd ~/.cheats/c4geeks";
   clu     = "curl -fsSL https://claude.ai/install.sh | bash";
   clv     = "claude -version";
