@@ -447,14 +447,14 @@ let
 
     ### Access
     - **Config files** (read at runtime, never hardcode):
-      - Terragrunt: `~/Library/Mobile Documents/com~apple~CloudDocs/projects/c4geeks/infra/terragrunt.hcl`
-      - Images: `~/Library/Mobile Documents/com~apple~CloudDocs/projects/c4geeks/infra/images.json`
+      - Terragrunt: `~/.cheats/c4geeks/infra/terragrunt.hcl`
+      - Images: `~/.cheats/c4geeks/infra/images.json`
     - **Network**: `public` (44a581e7-9dd8-4802-94da-810f59127558)
     - **Keypair**: `jkmutai-mac`
 
     ### Quick launch (preferred)
     ```bash
-    cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/projects/c4geeks/infra
+    cd ~/.cheats/c4geeks/infra
     ./vm.sh launch ubuntu-24            # default: basic flavor
     ./vm.sh launch rocky-10 standard    # with more resources
     ./vm.sh launch debian-13 advanced
