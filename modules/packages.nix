@@ -134,22 +134,17 @@ in {
     kustomize
 
     # Infrastructure as Code
-    crossplane-cli
-    ansible
-    opentofu
-    terragrunt
-    terraform-docs
+    # NOTE: most of the IaC stack (opentofu, terragrunt, ansible, terraform-docs,
+    # terrascan, tfsec, hcledit, tfupdate, crossplane, trivy) moved to Homebrew
+    # (see `brews` below) — nixpkgs-unstable lagged behind upstream (e.g. terragrunt
+    # was stuck at 0.97 vs 1.0.x). brew tracks latest. These two stay on nix because
+    # they're current and brew's formulae are unreliable/equal:
     tflint
     infracost
     # checkov  # Temporarily disabled due to pyarrow build issue
-    tfsec
-    terrascan
-    hcledit
     # pre-commit  # Temporarily disabled due to Swift build issues with clang 21.1.8
-    gitleaks
-    trivy
+    gitleaks   # kept on nix: also backs the git pre-commit hook (home.nix)
     graphviz
-    tfupdate
 
     # Secrets management
     sops
@@ -245,6 +240,18 @@ in {
       "openjdk"
       "anomalyco/tap/opencode"
       "poppler"   # pdftoppm/pdfinfo/pdftotext — PDF tooling (was an untracked leaf; zap would remove it)
+
+      # Infrastructure as Code — on brew to track latest (nixpkgs-unstable lags upstream)
+      "opentofu"
+      "terragrunt"
+      "ansible"
+      "terraform-docs"
+      "terrascan"
+      "tfsec"          # NOTE: EOL upstream (merged into trivy) — kept for parity
+      "hcledit"
+      "tfupdate"
+      "trivy"
+      "crossplane"     # crossplane CLI (was crossplane-cli in nixpkgs)
     ];
 
     # Homebrew 6.0 gates non-official taps behind a trust check. The trust store

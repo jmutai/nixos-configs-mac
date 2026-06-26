@@ -39,6 +39,6 @@ User: `jkmutai`, Hosts: `macbook-pro-3`, `jkm-macbook-pro-4`.
 
 ## Gotchas
 - `onActivation.cleanup = "zap"` removes any Homebrew app NOT in the casks list
-- Terragrunt has a custom overlay in flake.nix (build fix)
+- IaC tools (terragrunt, opentofu, ansible, trivy, etc.) live in Homebrew `brews`, not nix — nixpkgs-unstable lags upstream releases. `tflint`/`infracost`/`gitleaks` stay on nix.
 - `electron-36.9.5` is permitted insecure in nixpkgs config
 - Empty dirs at `~/.config/<app>/` can block home-manager symlinks — delete them
