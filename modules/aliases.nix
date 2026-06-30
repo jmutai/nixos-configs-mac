@@ -19,6 +19,7 @@
   gpf = "git push --force-with-lease origin";
   push = "git push -u origin main";
   greset = "git reset --hard origin/main";
+  gsync = "git checkout main && git fetch origin && git reset --hard origin/main";
   gdb = "git branch | grep -v '^\\* ' | grep -v '^  main$' | xargs -r git branch -D";
 
   # kubectl aliases
@@ -77,8 +78,11 @@
   tfp   = "tofu plan";
   tgi   = "terragrunt init";
   tgp   = "terragrunt plan";
+  tgpw  = "terragrunt plan --working-dir";
   tga   = "terragrunt apply";
+  tgaw  = "terragrunt apply --working-dir";
   tgaa  = "terragrunt apply -auto-approve";
+  tgaaw = "terragrunt apply -auto-approve --working-dir";
   tgri  = "terragrunt run --all init";
   tgrp  = "terragrunt run --all plan";
   tgra  = "terragrunt run --all apply";

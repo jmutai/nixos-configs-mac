@@ -521,10 +521,11 @@ let
     - New files MUST be tracked by git before rebuild (flakes require it)
     - System packages go in `modules/packages.nix`, per-program configs in `modules/home/programs/`
 
-    ## Git commits
+    ## Git commits & PRs
     - Write clear, concise commit messages summarizing changes
     - NEVER add "Co-Authored-By" lines or any AI/Claude attribution to commits
     - Only my name (jmutai) should appear in git history — no AI contributor traces anywhere
+    - STRICT: Pull requests MUST always be opened as the `jmutai` GitHub account — NEVER use `f4e-bot`, `c4geeks`, or any other gh account. Before running `gh pr create`, ensure the active gh account is `jmutai` (`gh auth switch --user jmutai`). If `jmutai` is not authenticated in `gh`, STOP and ask me to run `gh auth login` as jmutai — do not fall back to another account. (Enforced by the `enforce-pr-author` PreToolUse hook.)
 
     ## Safety rules
     - Never commit `.env`, credentials, or secrets files

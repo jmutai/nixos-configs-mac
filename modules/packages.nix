@@ -164,6 +164,7 @@ in {
     # Database clients
     postgresql
     mariadb
+    mongosh
 
     # VPN clients
     openvpn
