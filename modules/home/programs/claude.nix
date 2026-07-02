@@ -526,6 +526,7 @@ let
     - NEVER add "Co-Authored-By" lines or any AI/Claude attribution to commits
     - Only my name (jmutai) should appear in git history — no AI contributor traces anywhere
     - STRICT: Pull requests MUST always be opened as the `jmutai` GitHub account — NEVER use `f4e-bot`, `c4geeks`, or any other gh account. Before running `gh pr create`, ensure the active gh account is `jmutai` (`gh auth switch --user jmutai`). If `jmutai` is not authenticated in `gh`, STOP and ask me to run `gh auth login` as jmutai — do not fall back to another account. (Enforced by the `enforce-pr-author` PreToolUse hook.)
+    - After every `git push` of a branch, print the complete PR-creation link, e.g. `https://github.com/Food4education/f4e-services-specs/pull/new/feat/my-branch` (derive from `git remote get-url origin` + `/pull/new/<branch>`). Full URL, never shorthand.
 
     ## Safety rules
     - Never commit `.env`, credentials, or secrets files

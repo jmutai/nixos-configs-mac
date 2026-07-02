@@ -253,6 +253,7 @@ in {
       "tfupdate"
       "trivy"
       "crossplane"     # crossplane CLI (was crossplane-cli in nixpkgs)
+      "cloud-sql-proxy"  # GCP Cloud SQL Auth Proxy
     ];
 
     # Homebrew 6.0 gates non-official taps behind a trust check. The trust store
@@ -287,7 +288,8 @@ in {
       "tailscale-app"
       "tunnelblick"
       "beekeeper-studio"
-      "microsoft-remote-desktop"
+      "dbeaver-community"
+      "windows-app"  # Windows Remote Desktop client (replaces discontinued microsoft-remote-desktop)
       "pritunl"
       "ghostty"
       "zed"

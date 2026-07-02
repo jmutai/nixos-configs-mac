@@ -20,6 +20,7 @@
   push = "git push -u origin main";
   greset = "git reset --hard origin/main";
   gsync = "git checkout main && git fetch origin && git reset --hard origin/main";
+  grbm = "git fetch origin && git rebase origin/main";  # rebase current branch onto latest main
   gdb = "git branch | grep -v '^\\* ' | grep -v '^  main$' | xargs -r git branch -D";
 
   # kubectl aliases
